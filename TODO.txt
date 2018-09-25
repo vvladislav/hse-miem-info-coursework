@@ -1,0 +1,9 @@
+status  nickname        task
+---------------------------------------
+0       Vladislav       create sturcture 4 project
+0       Vladislav       create class attackObject ann add to Makefile
+0       Vladislav       check constructors
+0       Vladislav       create class Game
+0       Vladislav       Player.h
+0       Mike            create structure 4 GUI part
+0       Mike            graphic of map
