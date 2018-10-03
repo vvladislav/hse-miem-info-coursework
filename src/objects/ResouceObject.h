@@ -2,24 +2,25 @@
 #define RESOURCE_OBJECT_H
 
 #include "All-include.h"
+#include "SimpleObject.h"
 
-class ResourceObject : SimpleObject
+class ResourceObject : public SimpleObject
 {
     private:
-        int value;
-        int type;
+        int value_;
+        std::string type_;
     public:
-        ResourceObject(): SimpleObject(){};
-        ResourceObject(std::pair<int,int> place): SimpleObject(std::pair<int,int> place){};
+        //ResourceObject(): SimpleObject(){};
+        //ResourceObject(std::pair<int,int> place): SimpleObject(std::pair<int,int> place){};
 
-        int const getValue() const ;
-        int const getType() const ;
+        virtual int const getValue() const ;
+        virtual std::string const getType() const ;
 
-        void setValue( int Value );
-        void setType( int Type );
+        virtual void setValue( int value );
+        virtual void setType( std::string type );
 
-        void addValue( int add );
-        void rmValue( int rm );
+        virtual void addValue( int add );
+        virtual void rmValue( int rm );
 
 };
 

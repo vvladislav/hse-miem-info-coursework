@@ -2,22 +2,26 @@
 #define MOVEING_OBJECT_H
 
 #include "All-include.h"
+#include "SimpleObject.h"
 
-class MovingObject : SimpleObject
+class MovingObject : virtual public SimpleObject
 {
     protected:
-        int speed;
+        int speed_ = 0;
+        std::pair<int,int> endPoint_;
     public:
-        MovingObject(): SimpleObject(){};
-        MovingObject(std::pair<int,int> place): SimpleObject(std::pair<int,int> place){};
+        //MovingObject(): SimpleObject(){};
+        //MovingObject(std::pair<int,int> place): SimpleObject(place){};
 
-        int const getSpeed() const ;
+        virtual int const getSpeed() const ;
 
-        void setSpeed( int Speed );
+        virtual void setSpeed( int speed );
 
-        void addSpeed( int add );
-        void rmSpeed( int rm );
-        void move( int x , int y );
+        virtual void addSpeed( int add );
+        virtual void rmSpeed( int rm );
+        virtual void move( int x , int y );
+        virtual void move( std::pair<int,int> endPoint );
+        virtual bool isMove();
 
 };
 

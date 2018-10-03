@@ -5,14 +5,15 @@ BIN-DIR=bin/
 TEX-DIR=tex/
 
 CXX=g++
-CXXFLAGS=-std=c++11 -pedantic -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wundef -Werror -Wno-unused
+CXXFLAGS=-std=c++14 -pedantic -Wmissing-declarations -Wmissing-include-dirs -Wnoexcept -Wundef -Werror -Wno-unused
+CXXHEADERSFLAGS=-I
 
 TEX=pdflatex
 TEXFLAGS=--interaction=batchmode -output-directory=$(BIN-DIR)
 TEXDEBUGFLAGS=-output-directory=$(BIN-DIR)
 
-cpp: $(SRC-DIR-GAME)Map.cpp $(SRC-DIR-GAME)Place.cpp $(SRC-DIR-GAME)Player.cpp $(SRC-DIR-OBJECTS)Building.cpp $(SRC-DIR-OBJECTS)DestroyingObject.cpp $(SRC-DIR-OBJECTS)MovingObject.cpp $(SRC-DIR-OBJECTS)ResouceObject.cpp $(SRC-DIR-OBJECTS)SimpleObject.cpp $(SRC-DIR-OBJECTS)Terrain.cpp $(SRC-DIR-OBJECTS)Unit.cpp $(SRC-DIR-OBJECTS)Weapon.cpp $(SRC-DIR)main.cpp 
-	$(CXX) $(CXXFLAGS) $(SRC-DIR-GAME)Map.cpp Place.cpp Player.cpp $(SRC-DIR-OBJECTS)Building.cpp DestroyingObject.cpp MovingObject.cpp ResouceObject.cpp SimpleObject.cpp Terrain.cpp Unit.cpp Weapon.cpp $(SRC-DIR)main.cpp  -o $(BIN-DIR)main.out
+cpp: $(SRC-DIR-GAME)Map.cpp $(SRC-DIR-GAME)Place.cpp $(SRC-DIR-GAME)Player.cpp $(SRC-DIR-OBJECTS)Building.cpp $(SRC-DIR-OBJECTS)DestroyingObject.cpp $(SRC-DIR-OBJECTS)MovingObject.cpp $(SRC-DIR-OBJECTS)ResouceObject.cpp $(SRC-DIR-OBJECTS)SimpleObject.cpp $(SRC-DIR-OBJECTS)Terrain.cpp $(SRC-DIR-OBJECTS)Unit.cpp $(SRC-DIR)main.cpp 
+	$(CXX) $(CXXFLAGS) $(CXXHEADERSFLAGS) src/ $(CXXHEADERSFLAGS) src/game_process/ $(CXXHEADERSFLAGS) src/objects/ $(SRC-DIR-GAME)Map.cpp $(SRC-DIR-GAME)Place.cpp $(SRC-DIR-GAME)Player.cpp $(SRC-DIR-OBJECTS)Building.cpp $(SRC-DIR-OBJECTS)DestroyingObject.cpp $(SRC-DIR-OBJECTS)MovingObject.cpp $(SRC-DIR-OBJECTS)ResouceObject.cpp $(SRC-DIR-OBJECTS)SimpleObject.cpp $(SRC-DIR-OBJECTS)Terrain.cpp $(SRC-DIR-OBJECTS)Unit.cpp $(SRC-DIR)main.cpp  -o $(BIN-DIR)main.out 
 
 cpp-clean: $(BIN-DIR)main.out
 	rm -f $(BIN-DIR)main.out

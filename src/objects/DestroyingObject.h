@@ -2,21 +2,24 @@
 #define DESTROYING_OBJECT_H
 
 #include "All-include.h"
+#include "SimpleObject.h"
 
-class DestroyingObject : SimpleObject
+class DestroyingObject : virtual public SimpleObject
 {
     protected:
-        int health;
+        int health_ = 0;
     public:
-        DestroyingObject(): SimpleObject(){};
-        DestroyingObject(std::pair<int,int> place): SimpleObject(std::pair<int,int> place){};
+        //DestroyingObject(): SimpleObject(){};
+        //DestroyingObject(std::pair<int,int> place): SimpleObject(place){};
 
-        int const getHealth() const ;
+        virtual int const getHealth() const ;
 
-        void setHealth( int Health );
+        virtual void setHealth( int health );
 
-        void addHealth( int add );
-        void rmHealth( int rm );
+        virtual void addHealth( int add );
+        virtual void rmHealth( int rm );
+
+        virtual bool isAlive();
 
 };
 

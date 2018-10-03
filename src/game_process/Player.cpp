@@ -1,5 +1,5 @@
 #include "All-include.h"
-#include "Place.h"
+#include "Player.h"
 
 Player::Player() {
     idPlayer_ = 0;
@@ -17,13 +17,13 @@ Player::Player(const Player& player) {
     this->name_ = player.getName();
     this->colorPlayer_ = player.getColor();
     this->resource_ = player.getResource();
-    this->choosedUnits_ = player.getChoosedUnits();
+    this->choosedUnits_ = player.getChoosed();
     this->playersUnits_ = player.getUnits();
     this->playersBuildings_ = player.getBuildings();
-    this->visiblePlaces_ = player.getVisibleUnits();
+    this->visiblePlaces_ = player.getVisiblePlaces();
 }
 
-Place::Place( int id ) {
+Player::Player( int id ) {
     idPlayer_ = id;
     name_ = "";
     colorPlayer_ = 0;
@@ -34,101 +34,104 @@ Place::Place( int id ) {
     visiblePlaces_.resize(0);
 }
 
-int const getId() const {
+int const Player::getId() const {
     return idPlayer_;
 }
 
-std::string const getName() const {
+std::string const Player::getName() const {
     return name_;
 }
 
-int const getColor() const {
+int const Player::getColor() const {
     return colorPlayer_;
 }
 
-std::vector<Units> getUnits() const {
+std::vector<Unit> Player::getUnits() const {
     return playersUnits_;
 }
 
-std::vector<Building> getBuildings() const {
-    return playersBuilding_;
+std::vector<Building> Player::getBuildings() const {
+    return playersBuildings_;
 }
 
-std::vector<Place> getVisiblePlaces() const {
-    return visibleplaces_;
+std::vector<Place*> Player::getVisiblePlaces() const {
+    return visiblePlaces_;
 }
 
-std::vector<int> getChoosedUnits() const {
+const std::vector<Unit*> Player::getChoosed() const {
     return choosedUnits_;
 }
 
-std::vector<int> getResource() const {
+std::vector<int> Player::getResource() const {
     return resource_;
 }
 
 //setPlaces();
 
-void setId(int const idPlayer) {
+void Player::setId(int const idPlayer) {
     idPlayer_ = idPlayer;
 }
 
-void setName(const std::string name) {
+void Player::setName(const std::string name) {
     name_ = name;
 }
 
-void setUnits(std::vector<units> newUnits) {
-    playersUnits_ = newUnits;_
+void Player::setUnits(std::vector<Unit> newUnits) {
+    playersUnits_ = newUnits;
 }
 
-void setChoosedUnits(std::vector<int> choosedUnits) {
+void Player::setChoosed(std::vector<Unit*> choosedUnits) {
     choosedUnits_ = choosedUnits;
 }
 
 //void setPlaces(std::vector<place> visiblePlaces);
 
-void setColor(int const idColor) {
+void Player::setColor(int const idColor) {
     colorPlayer_ = idColor;
 }
 
-void addUnit(units newUnit) {
+void Player::addUnit(Unit newUnit) {
     playersUnits_.push_back(newUnit);
 }
 
-void removeUnit(units oldUnit) {
-    playersUnits_.erase(vec.begin() + oldUnit.getId());
+void Player::removeUnit(Unit oldUnit) {
+    playersUnits_.erase(playersUnits_.begin() + oldUnit.getId().second);
 }
 
-void addBuilding(units newBuilding) {
-    playersUnits_.push_back(newBuilding);
+void Player::addBuilding( Building newBuilding) {
+    newBuilding.setId( std::make_pair(idPlayer_ , playersUnits_.size()) );
+    playersBuildings_.push_back(newBuilding);
 }
 
-void removeBuilding(Unit oldBuilding) {
-    playersBuildings_.erase(vec.begin() + oldBuilding.getId());
+void Player::removeBuilding(Building& oldBuilding) {
+    playersBuildings_.erase(playersBuildings_.begin() + oldBuilding.getId().second);
 }
 
-void addIdChoosedUnits(int chooseUnit) {
-    choosedUnits_.push_back(chooseUnit);
+void Player::removeBuilding( int oldBuilding) {
+    playersBuildings_.erase(playersBuildings_.begin() + oldBuilding);
 }
 
-void addChoosedUnits(std::vector<int> chooseUnits) {
-    choosedUnits_.add(choosedUnits_,chooseUnits);
+void Player::addIdChoosed(int chooseUnit) {
+    choosedUnits_.push_back(&(getUnits()[chooseUnit]));
 }
 
-void changePlaces(Unit travelUnit) {
+void Player::addIdChoosed(std::vector<Unit*> chooseUnit) {
+    choosedUnits_.insert(std::end(choosedUnits_), std::begin(chooseUnit), std::end(chooseUnit));
+    //choosedUnits_.add(choosedUnits_ , chooseUnit);
+}
+
+void Player::changePlaces(Unit travelUnit) {
     // create with time
 }
 
-void changePlaces(std::vector<units> travelUnits ) {
+void Player::changePlaces(std::vector<Unit*> travelUnits ) {
     // create with time
 }
 
-void addResources(int idResource, int quality) {
+void Player::addResources(int idResource, int quality) {
     resource_[idResource] += quality;
 }
 
-void spendResources(int idResource, int quality) {
+void Player::spendResources(int idResource, int quality) {
     resource_[idResource] -= quality;
-}
-
-
 }

@@ -5,13 +5,19 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <list>
 
-enum resources {
-    gold = 0,
-    stone = 0
 
-};
-
-//class Card;
+class Terrain;
+class Place;
+class Player;
+class Map;
+class SimpleObject;
+class AttackingObject;
+class DestroyingObject;
+class MovingObject;
+class Building;
+class Unit;
+class ResouceObject;
 
 #endif // ALL_INCLUDE_H

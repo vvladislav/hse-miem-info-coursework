@@ -2,6 +2,7 @@
 #define SIMPLE_OBJECT_H
 
 #include "All-include.h"
+#include "Place.h"
 
 class SimpleObject
 {
@@ -12,6 +13,7 @@ class SimpleObject
     public:
         SimpleObject();
         SimpleObject(std::pair<int,int> place);
+        SimpleObject& operator= ( const SimpleObject& simpleObject);
 
         // there are must be function with image
 

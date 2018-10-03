@@ -2,7 +2,7 @@
 #include "Place.h"
 
 Place::Place() {
-    coors_ = (0,0);
+    coors_ = std::make_pair(0,0);
     attack_.resize(0);
 }
 
@@ -11,13 +11,14 @@ Place::Place(const Place& place) {
     this->attack_ = place.getAttack();
 }
 
-Place& Place::operator = (const Place& place) {
+Place& Place::operator = ( const Place& place) {
     this->coors_ = place.getCoors();
     this->attack_ = place.getAttack();
+    return *this;
 }
 
 Place::Place( int x, int y ) {
-    coors_ = (x,y);
+    coors_ = std::make_pair(x,y);
     attack_.resize(0);
 }
 
@@ -27,41 +28,39 @@ Place::Place( std::pair<int,int> coors) {
 }
 
 Place::Place( int x, int y, Terrain ter ) {
-    coors_ = (x,y);
+    coors_ = std::make_pair(x,y);
     attack_.resize(0);
     ter_ = ter;
 }
 
-std::pair< int , int > const getCoors() const {
+std::pair< int , int > const Place::getCoors() const {
     return coors_;
 }
 
-std::vector<attackObject*> getAttackObjects() const {
+std::vector<AttackingObject*> Place::getAttack() const {
     return attack_;
 }
 
-terrain getTerrain() const {
+const Terrain& Place::getTerrain() const {
     return ter_;
 }
 
-void setAttack(std::vector<attackObject*> object) {
+void Place::setAttack(std::vector<AttackingObject*> object) {
     attack_ = object;
 }
 
-void setAttack( attackObject object) {
+void Place::setAttack( AttackingObject &object) {
     attack_.push_back(&object);
 }
 
-void setTerrain( &terrain ter) {
+void Place::setTerrain( Terrain& ter) {
     ter_ = ter;
 }
 
-void addObject(Object newObject) {
+void Place::addObject(SimpleObject* newObject) {
     stand_ =  newObject;
 }
 
-void removeObject() {
+void Place::removeObject() {
     stand_ = nullptr;
-}
-
 }

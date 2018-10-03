@@ -1,8 +1,10 @@
 status  nickname        task
 ---------------------------------------
-0       Vladislav       create sturcture 4 project
-0       Vladislav       create class attackObject ann add to Makefile
+1       Vladislav       create sturcture 4 project
+1       Vladislav       create class attackObject ann add to Makefile
 0       Vladislav       check constructors
 0       Vladislav       create class Game
-0       Vladislav       Player.h
+1       Vladislav       Player.h
+0       Vladislav       write operator= constructor for objects
+0       Vladislav       rewrite vectors to lists
 0                       create structure 4 GUI part
