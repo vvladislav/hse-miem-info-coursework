@@ -11,6 +11,8 @@
 
 # Ignore binary files
 *.out
+*.o
+*.exe
 
 # Ignore vim files
 *.vimrc

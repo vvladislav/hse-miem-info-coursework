@@ -5,11 +5,7 @@
 #include "MovingObject.h"
 #include "DestroyingObject.h"
 #include "AttackingObject.h"
-//#include "Building.h"
 
-//class Unit : virtual public MovingObject,
-//             virtual public DestroyingObject,
-//             virtual public AttackingObject
 class Unit : public MovingObject,
              public DestroyingObject,
              public AttackingObject

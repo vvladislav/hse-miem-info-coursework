@@ -117,7 +117,6 @@ void Player::addIdChoosed(int chooseUnit) {
 
 void Player::addIdChoosed(std::vector<Unit*> chooseUnit) {
     choosedUnits_.insert(std::end(choosedUnits_), std::begin(chooseUnit), std::end(chooseUnit));
-    //choosedUnits_.add(choosedUnits_ , chooseUnit);
 }
 
 void Player::changePlaces(Unit travelUnit) {
