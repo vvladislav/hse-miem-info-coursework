@@ -1,0 +1,18 @@
+# Ignore debug tex files
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex
+*.toc
+
+# Ignore tmp vim files
+*.swp
+
+# Ignore binary files
+*.out
+*.o
+*.exe
+
+# Ignore vim files
+*.vimrc
