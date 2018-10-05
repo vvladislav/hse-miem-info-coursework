@@ -3,13 +3,12 @@
 
 Player::Player() {
     idPlayer_ = 0;
-    name_ = "";
+    name_ = "No name";
     colorPlayer_ = 0;
-    //resource_.resize();
-    choosedUnits_.resize(0);
-    playersUnits_.resize(0);
-    playersBuildings_.resize(0);
-    visiblePlaces_.resize(0);
+    choosedUnits_.clear();
+    playersUnits_.clear();
+    playersBuildings_.clear();
+    visiblePlaces_.clear();
 }
 
 Player::Player(const Player& player) {
@@ -25,13 +24,12 @@ Player::Player(const Player& player) {
 
 Player::Player( int id ) {
     idPlayer_ = id;
-    name_ = "";
+    name_ = "No name";
     colorPlayer_ = 0;
-    //resource_.resize();
-    choosedUnits_.resize(0);
-    playersUnits_.resize(0);
-    playersBuildings_.resize(0);
-    visiblePlaces_.resize(0);
+    choosedUnits_.clear();
+    playersUnits_.clear();
+    playersBuildings_.clear();
+    visiblePlaces_.clear();
 }
 
 int const Player::getId() const {
@@ -46,19 +44,19 @@ int const Player::getColor() const {
     return colorPlayer_;
 }
 
-std::vector<Unit> Player::getUnits() const {
+std::list<Unit> Player::getUnits() const {
     return playersUnits_;
 }
 
-std::vector<Building> Player::getBuildings() const {
+std::list<Building> Player::getBuildings() const {
     return playersBuildings_;
 }
 
-std::vector<Place*> Player::getVisiblePlaces() const {
+std::list<Place*> Player::getVisiblePlaces() const {
     return visiblePlaces_;
 }
 
-const std::vector<Unit*> Player::getChoosed() const {
+const std::list<Unit*> Player::getChoosed() const {
     return choosedUnits_;
 }
 
@@ -76,15 +74,15 @@ void Player::setName(const std::string name) {
     name_ = name;
 }
 
-void Player::setUnits(std::vector<Unit> newUnits) {
+void Player::setUnits(std::list<Unit> newUnits) {
     playersUnits_ = newUnits;
 }
 
-void Player::setChoosed(std::vector<Unit*> choosedUnits) {
+void Player::setChoosed(std::list<Unit*> choosedUnits) {
     choosedUnits_ = choosedUnits;
 }
 
-//void setPlaces(std::vector<place> visiblePlaces);
+//void setPlaces(std::list<place> visiblePlaces);
 
 void Player::setColor(int const idColor) {
     colorPlayer_ = idColor;
@@ -95,7 +93,9 @@ void Player::addUnit(Unit newUnit) {
 }
 
 void Player::removeUnit(Unit oldUnit) {
-    playersUnits_.erase(playersUnits_.begin() + oldUnit.getId().second);
+    auto it = playersUnits_.begin();
+    std::advance( it, oldUnit.getId().second );
+    playersUnits_.erase(it);
 }
 
 void Player::addBuilding( Building newBuilding) {
@@ -104,26 +104,16 @@ void Player::addBuilding( Building newBuilding) {
 }
 
 void Player::removeBuilding(Building& oldBuilding) {
-    playersBuildings_.erase(playersBuildings_.begin() + oldBuilding.getId().second);
+    auto it = playersBuildings_.begin();
+    std::advance( it , oldBuilding.getId().second );
+    playersBuildings_.erase(it);
 }
 
-void Player::removeBuilding( int oldBuilding) {
-    playersBuildings_.erase(playersBuildings_.begin() + oldBuilding);
-}
-
-void Player::addIdChoosed(int chooseUnit) {
-    choosedUnits_.push_back(&(getUnits()[chooseUnit]));
-}
-
-void Player::addIdChoosed(std::vector<Unit*> chooseUnit) {
-    choosedUnits_.insert(std::end(choosedUnits_), std::begin(chooseUnit), std::end(chooseUnit));
+void Player::addChoosed( Unit* chooseUnit) {
+    choosedUnits_.push_back( chooseUnit );
 }
 
 void Player::changePlaces(Unit travelUnit) {
-    // create with time
-}
-
-void Player::changePlaces(std::vector<Unit*> travelUnits ) {
     // create with time
 }
 

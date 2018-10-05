@@ -19,17 +19,17 @@ Place& Place::operator = ( const Place& place) {
 
 Place::Place( int x, int y ) {
     coors_ = std::make_pair(x,y);
-    attack_.resize(0);
+    attack_.clear();
 }
 
 Place::Place( std::pair<int,int> coors) {
     coors_ = coors;
-    attack_.resize(0);
+    attack_.clear();
 }
 
 Place::Place( int x, int y, Terrain ter ) {
     coors_ = std::make_pair(x,y);
-    attack_.resize(0);
+    attack_.clear();
     ter_ = ter;
 }
 
@@ -37,7 +37,7 @@ std::pair< int , int > const Place::getCoors() const {
     return coors_;
 }
 
-std::vector<AttackingObject*> Place::getAttack() const {
+std::list<AttackingObject*> Place::getAttack() const {
     return attack_;
 }
 
@@ -45,7 +45,7 @@ const Terrain& Place::getTerrain() const {
     return ter_;
 }
 
-void Place::setAttack(std::vector<AttackingObject*> object) {
+void Place::setAttack(std::list<AttackingObject*> object) {
     attack_ = object;
 }
 

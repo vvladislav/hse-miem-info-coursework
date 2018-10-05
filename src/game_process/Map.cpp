@@ -50,7 +50,7 @@ void Map::setPlaces( std::vector<std::vector<Place>> places ) {
     places_ =  places;
 }
 
-Place Map::getPlace(int x, int y) {
+Place Map::getPlace(int x, int y) const {
     return places_[x][y];
 }
 

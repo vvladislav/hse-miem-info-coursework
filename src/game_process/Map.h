@@ -19,7 +19,7 @@ class Map
         void setPlace( Place place, int x, int y);
         void setPlaces( std::vector<std::vector<Place>> places );
 
-        Place getPlace(int x, int y) ;
+        Place getPlace(int x, int y) const;
         std::vector<std::vector<Place>> const getPlaces() const;
 
 };

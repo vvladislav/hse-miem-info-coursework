@@ -10,15 +10,15 @@ Building& Building::operator= ( const Building& building) {
     return *this;
 }
 
-std::vector< Unit* > const Building::getTrain() const {
+std::list< Unit* > const Building::getTrain() const {
     return train_;
 }
 
-std::vector< Unit* > const Building::getTraining() const {
+std::list< Unit* > const Building::getTraining() const {
     return training_;
 }
 
-std::vector < Building* > const Building::getRequire() const {
+std::list < Building* > const Building::getRequire() const {
     return require_;
 }
 
@@ -26,15 +26,15 @@ std::pair<int,int> Building::getId() const {
     return id_;
 }
 
-void Building::setTrain(std::vector< Unit* > train) {
+void Building::setTrain(std::list< Unit* > train) {
     train_ = train;
 }
 
-void Building::setTraining(std::vector< Unit* > training) {
+void Building::setTraining(std::list< Unit* > training) {
     training_ = training;
 }
 
-void Building::setRequire(std::vector< Building* > require) {
+void Building::setRequire(std::list< Building* > require) {
     require_ = require;
 }
 
@@ -47,7 +47,9 @@ void Building::addTrain(Unit* add) {
 }
 
 void Building::rmTrain( int idRm) {
-    train_.erase(train_.begin() + idRm);
+    auto it = train_.begin();
+    std::advance( it , idRm);
+    train_.erase(it);
 }
 
 void Building::addTraining(Unit* add ) {
@@ -55,7 +57,9 @@ void Building::addTraining(Unit* add ) {
 }
 
 void Building::rmTraining( int idRm ) {
-    training_.erase(training_.begin() + idRm);
+    auto it = training_.begin();
+    std::advance( it , idRm);
+    training_.erase(it);
 }
 
 void Building::addRequire( Building* add) {
@@ -63,7 +67,9 @@ void Building::addRequire( Building* add) {
 }
 
 void Building::rmRequire( int idRm) {
-    require_.erase(require_.begin() + idRm);
+    auto it = require_.begin();
+    std::advance( it , idRm);
+    require_.erase(it);
 }
 
 bool Building::hasRequire() {

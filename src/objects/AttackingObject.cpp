@@ -5,14 +5,14 @@ int AttackingObject::getAttack() const {
     return attack_;
 }
 
-int AttackObject::getRange() const {
+int SimpleObject::getRange() const {
     return range_
 }
 
-void AttackObject::setAttack( int const attack ) {
+void SimpleObject::setAttack( int const attack ) {
     attack_ = attack;
 }
 
-void AttackObject::setRange( int const range ) {
+void SimpleObject::setRange( int const range ) {
     range_ = range;
 }

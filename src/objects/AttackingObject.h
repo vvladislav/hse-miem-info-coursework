@@ -10,8 +10,6 @@ class AttackingObject : virtual public SimpleObject
         int power_ = 0;
         int range_ = 0;
     public:
-       //AttachikgObject(): SimpleObject(){};
-       //AttachikgObject(std::pair<int,int> place): SimpleObject(place){};
 
        int getAttack() const;
        int getRange() const;

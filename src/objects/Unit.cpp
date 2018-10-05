@@ -1,7 +1,7 @@
 #include "All-include.h"
 #include "Unit.h"
 
-std::vector < Building* > const Unit::getRequire() const {
+std::list < Building* > const Unit::getRequire() const {
     return require_;
 }
 
@@ -16,7 +16,7 @@ Unit& Unit::operator= ( const Unit& unit) {
     return *this;
 }
 
-void Unit::setRequire( std::vector< Building* > require ) {
+void Unit::setRequire( std::list< Building* > require ) {
     require_ = require;
 }
 
@@ -29,7 +29,9 @@ void Unit::addRequire( Building* add) {
 }
 
 void Unit::rmRequire( int idRm ) {
-    require_.erase(require_.begin() + idRm);
+    auto it = require_.begin();
+    std::advance( it ,idRm);
+    require_.erase(it);
 }
 
 bool Unit::hasRequire() {
