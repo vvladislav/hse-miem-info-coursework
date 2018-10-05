@@ -3,12 +3,17 @@
 
 SimpleObject::SimpleObject() {
     place_ = std::make_pair(0,0);
-    name_ = "";
+    name_ = "No name";
 }
 
 SimpleObject::SimpleObject(std::pair<int,int> place) {
     place_ = place;
-    name_ = "";
+    name_ = "No name";
+}
+
+SimpleObject::SimpleObject(const SimpleObject& simpleObject) {
+    this->place_ = simpleObject.getPlace();
+    this->name_ = simpleObject.getName();
 }
 
 SimpleObject& SimpleObject::operator= ( const SimpleObject& simpleObject) {

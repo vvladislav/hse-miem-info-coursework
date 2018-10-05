@@ -1,6 +1,21 @@
 #include "All-include.h"
 #include "MovingObject.h"
 
+MovingObject::MovingObject():SimpleObject() {
+    endPoint_ = SimpleObject::getPlace();
+}
+
+MovingObject::MovingObject(const MovingObject& movingObject) {
+    this->speed_ = movingObject.getSpeed(); 
+    this->endPoint_ = movingObject.SimpleObject::getPlace();
+}
+
+MovingObject& MovingObject::operator= ( const MovingObject& movingObject) {
+    this->speed_ = movingObject.getSpeed(); 
+    this->endPoint_ = movingObject.SimpleObject::getPlace();
+    return *this;
+}
+
 int const MovingObject::getSpeed() const {
     return speed_;
 }

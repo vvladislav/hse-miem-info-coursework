@@ -1,11 +1,12 @@
 status  nickname        task
 ---------------------------------------
 1       Vladislav       create sturcture 4 project
-1       Vladislav       create class attackObject ann add to Makefile
+1       Vladislav       create class attackObject
+1       Vladislav       add attackObject to Makefile
 0       Vladislav       check constructors
 0       Vladislav       create class Game
 1       Vladislav       Player.h
-0       Vladislav       write operator= constructor for objects
+1       Vladislav       write operator= constructor for objects
 1       Vladislav       rewrite vectors to lists
 0       Mike            create structure 4 GUI part
 0       Mike            graphic of map

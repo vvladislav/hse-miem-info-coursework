@@ -1,19 +1,28 @@
 #include "All-include.h"
 #include "Unit.h"
 
+Unit::Unit():MovingObject(), AttackingObject(), DestroyingObject(),SimpleObject() {
+    id_ = std::make_pair(0,0);
+    require_.clear();
+}
+
+Unit::Unit(const Unit& unit) {
+    this->id_ = unit.getId();
+    this->require_ = unit.getRequire();
+}
+
+Unit& Unit::operator= ( const Unit& unit) {
+    this->id_ = unit.getId();
+    this->require_ = unit.getRequire();
+    return *this;
+}
+
 std::list < Building* > const Unit::getRequire() const {
     return require_;
 }
 
 std::pair<int,int> Unit::getId() const {
     return id_;
-}
-
-Unit& Unit::operator= ( const Unit& unit) {
-    this->id_ = unit.getId();
-    this->require_ = unit.getRequire();
-    this->place_ = unit.MovingObject::SimpleObject::getPlace();
-    return *this;
 }
 
 void Unit::setRequire( std::list< Building* > require ) {

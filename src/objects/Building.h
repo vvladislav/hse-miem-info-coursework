@@ -6,7 +6,7 @@
 #include "DestroyingObject.h"
 #include "Unit.h"
 
-class Building : public DestroyingObject, virtual public AttackingObject
+class Building : public DestroyingObject, public AttackingObject
 {
     private:
         std::pair< int , int > id_; // player's id, id in list
@@ -14,8 +14,8 @@ class Building : public DestroyingObject, virtual public AttackingObject
         std::list< Unit* > training_;
         std::list < Building* > require_;
     public:
-        //Building():DestroyingObject(){};
-        //Building(std::pair<int,int> place):DestroyingObject(place){};
+        Building();
+        Building(const Building& building);
         Building& operator= ( const Building& building);
 
         std::list< Unit* > const getTrain() const;

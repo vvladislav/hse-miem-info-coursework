@@ -14,6 +14,8 @@ class Unit : public MovingObject,
         std::pair< int , int > id_; // < player's id, id in list >
         std::list < Building* > require_;
     public:
+        Unit();
+        Unit(const Unit& unit);
         Unit& operator= ( const Unit& unit);
 
         std::list < Building* > const getRequire() const;

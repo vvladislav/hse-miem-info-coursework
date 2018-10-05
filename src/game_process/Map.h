@@ -14,6 +14,7 @@ class Map
         Map(const Map& map);
         Map(std::vector<std::vector<Place>> places);
         Map& operator= (const Map& map);
+        const std::vector<Place> operator[] ( const int x) const;
 
         void setPlace( Place place);
         void setPlace( Place place, int x, int y);

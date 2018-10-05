@@ -7,19 +7,22 @@
 class DestroyingObject : virtual public SimpleObject
 {
     protected:
-        int health_ = 0;
+        int health_;
     public:
-        //DestroyingObject(): SimpleObject(){};
-        //DestroyingObject(std::pair<int,int> place): SimpleObject(place){};
+        DestroyingObject();
+        DestroyingObject(const DestroyingObject& destroyingObject);
+        DestroyingObject& operator= ( const DestroyingObject& destroyingObject );
+        DestroyingObject& operator- ( int rm );
+        DestroyingObject& operator+ ( int add );
 
-        virtual int const getHealth() const ;
+        int const getHealth() const ;
 
-        virtual void setHealth( int health );
+        void setHealth( int health );
 
-        virtual void addHealth( int add );
-        virtual void rmHealth( int rm );
+        void addHealth( int add );
+        void rmHealth( int rm );
 
-        virtual bool isAlive();
+        bool isAlive();
 
 };
 

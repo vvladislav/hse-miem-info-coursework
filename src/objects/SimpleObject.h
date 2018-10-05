@@ -13,6 +13,7 @@ class SimpleObject
     public:
         SimpleObject();
         SimpleObject(std::pair<int,int> place);
+        SimpleObject(const SimpleObject& simpleObject);
         SimpleObject& operator= ( const SimpleObject& simpleObject);
 
         // there are must be function with image

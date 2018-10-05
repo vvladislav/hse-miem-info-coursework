@@ -1,10 +1,24 @@
 #include "All-include.h"
 #include "Building.h"
+#include "AttackingObject.h"
+
+Building::Building():AttackingObject(), DestroyingObject(),SimpleObject()  {
+    id_ = std::make_pair(0,0);
+    require_.clear();
+    train_.clear();
+    training_.clear();
+}
+
+Building::Building( const Building& building ) {
+    this->id_ = building.getId();
+    this->require_ = building.getRequire();
+    this->train_ = building.getTrain();
+    this->training_ = building.getTraining();
+}
 
 Building& Building::operator= ( const Building& building) {
     this->id_ = building.getId();
     this->require_ = building.getRequire();
-    this->place_ = building.getPlace();
     this->train_ = building.getTrain();
     this->training_ = building.getTraining();
     return *this;

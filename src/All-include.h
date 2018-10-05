@@ -18,6 +18,6 @@ class DestroyingObject;
 class MovingObject;
 class Building;
 class Unit;
-class ResouceObject;
+class ResourceObject;
 
 #endif // ALL_INCLUDE_H
