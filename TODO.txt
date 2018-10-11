@@ -11,3 +11,5 @@ status  nickname        task
 0       Mike            create structure 4 GUI part
 0       Mike            graphic of map
 0       Vladislav       check const
+0       Vladislav       add check in methods
+0       Vladislav       add game to Makefile

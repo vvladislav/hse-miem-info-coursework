@@ -12,8 +12,8 @@ TEX=pdflatex
 TEXFLAGS=--interaction=batchmode -output-directory=$(BIN-DIR)
 TEXDEBUGFLAGS=-output-directory=$(BIN-DIR)
 
-cpp: $(SRC-DIR-GAME)Map.cpp $(SRC-DIR-GAME)Place.cpp $(SRC-DIR-GAME)Player.cpp $(SRC-DIR-OBJECTS)Building.cpp $(SRC-DIR-OBJECTS)DestroyingObject.cpp $(SRC-DIR-OBJECTS)MovingObject.cpp $(SRC-DIR-OBJECTS)AttackingObject.cpp $(SRC-DIR-OBJECTS)ResourceObject.cpp $(SRC-DIR-OBJECTS)SimpleObject.cpp $(SRC-DIR-OBJECTS)Terrain.cpp $(SRC-DIR-OBJECTS)Unit.cpp $(SRC-DIR)main.cpp 
-	$(CXX) $(CXXFLAGS) $(CXXHEADERSFLAGS) src/ $(CXXHEADERSFLAGS) src/game_process/ $(CXXHEADERSFLAGS) src/objects/ $(SRC-DIR-GAME)Map.cpp $(SRC-DIR-GAME)Place.cpp $(SRC-DIR-GAME)Player.cpp $(SRC-DIR-OBJECTS)Building.cpp $(SRC-DIR-OBJECTS)DestroyingObject.cpp $(SRC-DIR-OBJECTS)MovingObject.cpp $(SRC-DIR-OBJECTS)AttackingObject.cpp $(SRC-DIR-OBJECTS)ResourceObject.cpp $(SRC-DIR-OBJECTS)SimpleObject.cpp $(SRC-DIR-OBJECTS)Terrain.cpp $(SRC-DIR-OBJECTS)Unit.cpp $(SRC-DIR)main.cpp  -o $(BIN-DIR)main.out 
+cpp: $(SRC-DIR-GAME)Map.cpp $(SRC-DIR-GAME)Place.cpp $(SRC-DIR-GAME)Player.cpp $(SRC-DIR-OBJECTS)Building.cpp $(SRC-DIR-OBJECTS)DestroyingObject.cpp $(SRC-DIR-OBJECTS)MovingObject.cpp $(SRC-DIR-OBJECTS)ResourceObject.cpp $(SRC-DIR-OBJECTS)SimpleObject.cpp $(SRC-DIR-OBJECTS)Terrain.cpp $(SRC-DIR-OBJECTS)Unit.cpp $(SRC-DIR)main.cpp 
+	$(CXX) $(CXXFLAGS) $(CXXHEADERSFLAGS) src/ $(CXXHEADERSFLAGS) src/game_process/ $(CXXHEADERSFLAGS) src/objects/ $(SRC-DIR-GAME)Map.cpp $(SRC-DIR-GAME)Place.cpp $(SRC-DIR-GAME)Player.cpp $(SRC-DIR-OBJECTS)Building.cpp $(SRC-DIR-OBJECTS)DestroyingObject.cpp $(SRC-DIR-OBJECTS)MovingObject.cpp $(SRC-DIR-OBJECTS)ResourceObject.cpp $(SRC-DIR-OBJECTS)SimpleObject.cpp $(SRC-DIR-OBJECTS)Terrain.cpp $(SRC-DIR-OBJECTS)Unit.cpp $(SRC-DIR)main.cpp  -o $(BIN-DIR)main.out 
 
 cpp-clean: $(BIN-DIR)main.out
 	rm -f $(BIN-DIR)main.out

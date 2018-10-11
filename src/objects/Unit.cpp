@@ -6,7 +6,7 @@ Unit::Unit():MovingObject(), AttackingObject(), DestroyingObject(),SimpleObject(
     require_.clear();
 }
 
-Unit::Unit(const Unit& unit) {
+Unit::Unit(const Unit& unit):MovingObject(unit), AttackingObject(unit), DestroyingObject(unit) {
     this->id_ = unit.getId();
     this->require_ = unit.getRequire();
 }

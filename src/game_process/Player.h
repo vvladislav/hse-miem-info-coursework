@@ -16,6 +16,7 @@ class Player {
         std::list<Unit*> choosedUnits_; // maybe add for building
         std::list<Building> playersBuildings_;
         std::list<Place*> visiblePlaces_; // id
+        bool inGame_;
         
     public:
         Player();
