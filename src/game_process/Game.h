@@ -8,6 +8,7 @@
 
 class Game {
     private:
+        Map map_;
         std::vector<Player> players_;
         std::vector<Unit> unitPrototype_;
         std::vector<Building> buildingPrototype_;

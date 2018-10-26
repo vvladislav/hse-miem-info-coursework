@@ -63,3 +63,7 @@ Place Map::getPlace(int x, int y) const {
 std::vector<std::vector<Place>> const Map::getPlaces() const {
     return places_;
 }
+
+int Map::getSize() const {
+    return places_.size();
+}

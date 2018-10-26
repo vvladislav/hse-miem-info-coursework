@@ -8,6 +8,7 @@
 class SimpleObject
 {
     protected:
+        std::pair< int , int > id_; // player's id, id in list
         Place* place_;
         std::string name_;
         // there are must be image
@@ -22,9 +23,11 @@ class SimpleObject
 
         Place* const getPlace() const;
         std::string const getName() const;
+        std::pair<int,int> getId() const;
 
         void setPlace( Place* place);
         void setName( std::string name);
+        void setId( std::pair<int,int> id );
 
         ~SimpleObject();
 

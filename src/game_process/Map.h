@@ -22,6 +22,7 @@ class Map
 
         Place getPlace(int x, int y) const;
         std::vector<std::vector<Place>> const getPlaces() const;
+        int getSize() const;
 
 };
 

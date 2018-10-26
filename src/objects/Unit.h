@@ -11,7 +11,6 @@ class Unit : public MovingObject,
              public AttackingObject
 {
     private:
-        std::pair< int , int > id_; // < player's id, id in list >
         std::list < Building* > require_;
     public:
         Unit();
@@ -20,10 +19,8 @@ class Unit : public MovingObject,
         bool operator== (const Unit& unit) const;
 
         std::list < Building* > const getRequire() const;
-        std::pair<int,int> getId() const;
 
         void setRequire(std::list< Building* > require);
-        void setId( std::pair<int,int> id );
 
         void addRequire( Building* add);
         void rmRequire( int idRm );

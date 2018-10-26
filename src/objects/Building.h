@@ -9,7 +9,6 @@
 class Building : public DestroyingObject, public AttackingObject
 {
     private:
-        std::pair< int , int > id_; // player's id, id in list
         std::list< Unit* > train_;
         std::list< Unit* > training_;
         std::list < Building* > require_;
@@ -22,12 +21,10 @@ class Building : public DestroyingObject, public AttackingObject
         std::list< Unit* > const getTrain() const;
         std::list< Unit* > const getTraining() const;
         std::list < Building* > const getRequire() const;
-        std::pair<int,int> getId() const;
 
         void setTrain(std::list< Unit* > train);
         void setTraining(std::list< Unit* > training);
         void setRequire(std::list< Building* > require);
-        void setId( std::pair<int,int> id );
 
         void addTrain(Unit* train);
         void rmTrain(int idRm);

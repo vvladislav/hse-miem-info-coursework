@@ -130,24 +130,65 @@ bool Game::save( std::string saveFileName ) {
     fout.open(path, std::ios_base::out);
     if (!(fout.is_open()))
         return false;
-    // read game private
+    // map
+    fout << map_.getSize()
+         << std::endl;
+    for ( int i = 0; i < map_.getSize(); ++i ) {
+        fout << map_[i].size()
+             << std::endl;
+        for ( int j = 0; j < map_.getSize(); ++j ) {
+            fout << map_[i][j].getCoors().first
+                 << map_[i][j].getCoors().second
+                 << std::endl;
+            if ( map_[i][j].getObject() ) {
+                fout << map_[i][j].getObject()->getId().first
+                     << map_[i][j].getObject()->getId().second
+                     << std::endl;
+            }
+            else {
+                fout << -1
+                     << -1
+                     << std::endl;
+            }
+            fout << map_[i][j].getAttack().size()
+                 << std::endl;
+            for ( auto k : map_[i][j].getAttack() ) {
+                fout << k->getId().first
+                     << k->getId().second
+                     << std::endl;
+            }
+            // map.terrain
+            fout << map_[i][j].getTerrain().getSpeed() << ' '
+                 << map_[i][j].getTerrain().getPermeability()
+                 << std::endl;
+        }
+    }
+    // units
     fout << unitPrototype_.size() << std::endl;
     for ( int i = 0; i < unitPrototype_.size(); ++i ) {
-        fout << unitPrototype_[i].SimpleObject::getPlace()->getCoors().first
-             << unitPrototype_[i].SimpleObject::getPlace()->getCoors().second
-             << std::endl;
+        if ( unitPrototype_[i].getPlace() ) {
+            fout << unitPrototype_[i].getPlace()->getCoors().first << ' '
+                 << unitPrototype_[i].getPlace()->getCoors().second
+                 << std::endl;
+        }
+        else {
+            fout << -1
+                 << -1
+                 << std::endl;
+        }
         fout << unitPrototype_[i].SimpleObject::getName()
              << std::endl;
-        fout << unitPrototype_[i].MovingObject::getSpeed();
-        fout << unitPrototype_[i].MovingObject::getEndPoint().first
+        fout << unitPrototype_[i].MovingObject::getSpeed()
+             << std::endl;
+        fout << unitPrototype_[i].MovingObject::getEndPoint().first << ' '
              << unitPrototype_[i].MovingObject::getEndPoint().second
              << std::endl;
-        fout << unitPrototype_[i].AttackingObject::getAttack()
+        fout << unitPrototype_[i].AttackingObject::getAttack() << ' '
              << unitPrototype_[i].AttackingObject::getRange()
              << std::endl;  
-        fout << unitPrototype_[i].DestroyingObject::getHealth()
+        fout << unitPrototype_[i].DestroyingObject::getHealth() << ' '
              << std::endl;
-        fout << unitPrototype_[i].getId().first
+        fout << unitPrototype_[i].getId().first << ' '
              << unitPrototype_[i].getId().second
              << std::endl;
         fout << unitPrototype_[i].getRequire().size()
@@ -157,10 +198,43 @@ bool Game::save( std::string saveFileName ) {
                  << std::endl;
         }
     }
+    // building
     fout << buildingPrototype_.size() << std::endl;
     for ( int i = 0; i < buildingPrototype_.size(); ++i ) {
-        //building
+        if ( buildingPrototype_[i].getPlace() ) {
+            fout << buildingPrototype_[i].getPlace()->getCoors().first << ' '
+                 << buildingPrototype_[i].getPlace()->getCoors().second
+                 << std::endl;
+        }
+        else {
+            fout << -1
+                 << -1
+                 << std::endl;
+        }
+        fout << buildingPrototype_[i].SimpleObject::getName()
+             << std::endl;
+        fout << buildingPrototype_[i].AttackingObject::getAttack() << ' '
+             << buildingPrototype_[i].AttackingObject::getRange()
+             << std::endl;
+        fout << buildingPrototype_[i].DestroyingObject::getHealth()
+             << std::endl;
+        fout << buildingPrototype_[i].getId().first << ' '
+             << buildingPrototype_[i].getId().second
+             << std::endl;
+        fout << buildingPrototype_[i].getTrain().size()
+             << std::endl;
+        for ( auto j : buildingPrototype_[i].getTrain() ) {
+            fout << j->getId().second
+                 << std::endl;
+        }
+        fout << buildingPrototype_[i].getRequire().size()
+             << std::endl;
+        for ( auto j : buildingPrototype_[i].getRequire() ) {
+            fout << j->getId().second
+                 << std::endl;
+        }
     }
+    // resource
     fout << resourcePrototype_.size()
          << std::endl;
     for ( int i = 0; i < resourcePrototype_.size(); ++i ) {
@@ -169,6 +243,7 @@ bool Game::save( std::string saveFileName ) {
     }
     fout << players_.size()
          << std::endl;
+    // players
     for ( int i = 0; i < players_.size(); ++i ) {
         fout << players_[i].getId()
              << std::endl;
@@ -182,24 +257,33 @@ bool Game::save( std::string saveFileName ) {
             fout << players_[i].getResource()[j].second
                  << std::endl;
         }
+        // players.units
         fout << players_[i].getUnits().size()
              << std::endl;
         for ( auto p : players_[i].getUnits() ) {
-            fout << p.SimpleObject::getPlace()->getCoors().first
-                 << p.SimpleObject::getPlace()->getCoors().second
-                 << std::endl;
+            if ( p.getPlace() ) {
+                fout << p.getPlace()->getCoors().first << ' '
+                     << p.getPlace()->getCoors().second
+                     << std::endl;
+            }
+            else {
+                fout << -1
+                     << -1
+                     << std::endl;
+            }
             fout << p.SimpleObject::getName()
                  << std::endl;
-            fout << p.MovingObject::getSpeed();
-            fout << p.MovingObject::getEndPoint().first
+            fout << p.MovingObject::getSpeed()
+                 << std::endl;
+            fout << p.MovingObject::getEndPoint().first << ' '
                  << p.MovingObject::getEndPoint().second
                  << std::endl;
-            fout << p.AttackingObject::getAttack()
+            fout << p.AttackingObject::getAttack() << ' '
                  << p.AttackingObject::getRange()
                  << std::endl;  
             fout << p.DestroyingObject::getHealth()
                  << std::endl;
-            fout << p.getId().first
+            fout << p.getId().first << ' '
                  << p.getId().second
                  << std::endl;
             fout << p.getRequire().size()
@@ -217,21 +301,28 @@ bool Game::save( std::string saveFileName ) {
             fout << p->getId().second
                  << std::endl;
         }
-        //buildings
+        // players.buildings
         fout << players_[i].getBuildings().size()
              << std::endl;
         for ( auto p : players_[i].getBuildings() ) {
-            fout << p.SimpleObject::getPlace()->getCoors().first
-                 << p.SimpleObject::getPlace()->getCoors().second
-                 << std::endl;
+            if ( p.getPlace() ) {
+                fout << p.getPlace()->getCoors().first << ' '
+                     << p.getPlace()->getCoors().second
+                     << std::endl;
+            }
+            else {
+                fout << -1
+                     << -1
+                     << std::endl;
+            }
             fout << p.SimpleObject::getName()
                  << std::endl;
-            fout << p.AttackingObject::getAttack()
+            fout << p.AttackingObject::getAttack() << ' '
                  << p.AttackingObject::getRange()
                  << std::endl;  
             fout << p.DestroyingObject::getHealth()
                  << std::endl;
-            fout << p.getId().first
+            fout << p.getId().first << ' '
                  << p.getId().second
                  << std::endl;
             fout << p.getTrain().size()

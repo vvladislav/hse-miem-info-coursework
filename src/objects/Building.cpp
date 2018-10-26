@@ -3,14 +3,12 @@
 #include "AttackingObject.h"
 
 Building::Building():AttackingObject(), DestroyingObject(), SimpleObject() {
-    id_ = std::make_pair(0,0);
     require_.clear();
     train_.clear();
     training_.clear();
 }
 
 Building::Building( const Building& building ): AttackingObject(building), DestroyingObject(building), SimpleObject(building) {
-    this->id_ = building.getId();
     this->require_ = building.getRequire();
     this->train_ = building.getTrain();
     this->training_ = building.getTraining();
@@ -19,7 +17,6 @@ Building::Building( const Building& building ): AttackingObject(building), Destr
 Building& Building::operator= ( const Building& building) {
     DestroyingObject::operator= (building);
     SimpleObject::operator= (building);
-    this->id_ = building.getId();
     this->require_ = building.getRequire();
     this->train_ = building.getTrain();
     this->training_ = building.getTraining();
@@ -27,8 +24,7 @@ Building& Building::operator= ( const Building& building) {
 }
 
 bool Building::operator== ( const Building& building) const {
-    if ((this->id_      == building.getId()) &&
-        (this->train_   == building.getTrain()) &&
+    if ((this->train_   == building.getTrain()) &&
         (this->training_== building.getTraining()) &&
         (this->require_ == building.getRequire()) &&
         (static_cast< AttackingObject & >(const_cast< Building & >(*this)) ==
@@ -51,10 +47,6 @@ std::list < Building* > const Building::getRequire() const {
     return require_;
 }
 
-std::pair<int,int> Building::getId() const {
-    return id_;
-}
-
 void Building::setTrain(std::list< Unit* > train) {
     train_ = train;
 }
@@ -65,10 +57,6 @@ void Building::setTraining(std::list< Unit* > training) {
 
 void Building::setRequire(std::list< Building* > require) {
     require_ = require;
-}
-
-void Building::setId( std::pair<int,int> id ) {
-    id_ = id;
 }
 
 void Building::addTrain(Unit* add) {
