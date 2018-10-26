@@ -8,7 +8,7 @@ class Place
 {
     private:
         std::pair<int,int> coors_;
-        SimpleObject* stand_ = nullptr;
+        SimpleObject* object_ = nullptr;
         std::list<AttackingObject*> attack_;
         Terrain ter_;
     public:
@@ -22,13 +22,12 @@ class Place
         std::pair< int , int > const getCoors() const;
         std::list<AttackingObject*> getAttack() const;
         const Terrain& getTerrain() const;
+        const SimpleObject* getObject() const;
 
         void setAttack(std::list<AttackingObject*> object);
         void setAttack(AttackingObject &object);
         void setTerrain( Terrain& ter);
-
-        void addObject(SimpleObject* newObject);
-        void removeObject();
+        void setObject(SimpleObject* newObject);
 
 };
 

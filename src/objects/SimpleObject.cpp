@@ -2,11 +2,11 @@
 #include "SimpleObject.h"
 
 SimpleObject::SimpleObject() {
-    place_ = std::make_pair(0,0);
+    place_ = nullptr;
     name_ = "No name";
 }
 
-SimpleObject::SimpleObject(std::pair<int,int> place) {
+SimpleObject::SimpleObject(Place* place) {
     place_ = place;
     name_ = "No name";
 }
@@ -29,7 +29,7 @@ bool SimpleObject::operator== ( const SimpleObject& simpleObject) const {
     return false;
 }
 
-std::pair<int,int> const SimpleObject::getPlace() const {
+Place* const SimpleObject::getPlace() const {
     return place_;
 }
 
@@ -37,10 +37,14 @@ std::string const SimpleObject::getName() const {
     return name_;
 }
 
-void SimpleObject::setPlace( std::pair<int,int> place) {
+void SimpleObject::setPlace( Place* place) {
     place_ = place;
 }
 
 void SimpleObject::setName( std::string name) {
     name_ = name;
+}
+
+SimpleObject::~SimpleObject() {
+    place_->setObject(nullptr);
 }

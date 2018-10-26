@@ -46,8 +46,11 @@ void DestroyingObject::addHealth( int add ) {
 
 void DestroyingObject::rmHealth( int rm ) {
     health_ -= rm;
+    if ( health_ <= 0 )
+        this->~DestroyingObject();
 }
 
-bool DestroyingObject::isAlive() {
-    return ( health_ > 0 );
+DestroyingObject::~DestroyingObject() {
+    // death animation
+    this->~SimpleObject();
 }

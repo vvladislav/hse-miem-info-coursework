@@ -23,7 +23,7 @@ class DestroyingObject : virtual public SimpleObject
         void addHealth( int add );
         void rmHealth( int rm );
 
-        bool isAlive();
+        ~DestroyingObject();
 
 };
 

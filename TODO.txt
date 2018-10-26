@@ -4,7 +4,7 @@ status  nickname        task
 1       Vladislav       create class attackObject
 1       Vladislav       add attackObject to Makefile
 0       Vladislav       check constructors
-0       Vladislav       check destructors
+1       Vladislav       check destructors
 0       Vladislav       create class Game
 1       Vladislav       Player.h
 1       Vladislav       write operator= constructor for objects

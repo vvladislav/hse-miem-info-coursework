@@ -45,6 +45,10 @@ const Terrain& Place::getTerrain() const {
     return ter_;
 }
 
+const SimpleObject* Place::getObject() const {
+    return object_;
+}
+
 void Place::setAttack(std::list<AttackingObject*> object) {
     attack_ = object;
 }
@@ -57,10 +61,6 @@ void Place::setTerrain( Terrain& ter) {
     ter_ = ter;
 }
 
-void Place::addObject(SimpleObject* newObject) {
-    stand_ =  newObject;
-}
-
-void Place::removeObject() {
-    stand_ = nullptr;
+void Place::setObject(SimpleObject* newObject) {
+    object_ =  newObject;
 }

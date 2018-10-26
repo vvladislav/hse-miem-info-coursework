@@ -2,17 +2,17 @@
 #include "MovingObject.h"
 
 MovingObject::MovingObject():SimpleObject() {
-    endPoint_ = SimpleObject::getPlace();
+    endPoint_ = SimpleObject::getPlace()->getCoors();
 }
 
 MovingObject::MovingObject(const MovingObject& movingObject) {
     this->speed_ = movingObject.getSpeed(); 
-    this->endPoint_ = movingObject.SimpleObject::getPlace();
+    this->endPoint_ = movingObject.SimpleObject::getPlace()->getCoors();
 }
 
 MovingObject& MovingObject::operator= ( const MovingObject& movingObject) {
     this->speed_ = movingObject.getSpeed(); 
-    this->endPoint_ = movingObject.SimpleObject::getPlace();
+    this->endPoint_ = movingObject.SimpleObject::getPlace()->getCoors();
     return *this;
 }
 
@@ -54,5 +54,5 @@ void MovingObject::rmSpeed( int rm ) {
 }
 
 bool MovingObject::isMove() {
-    return ( endPoint_ != place_ );
+    return ( endPoint_ != place_->getCoors() );
 }

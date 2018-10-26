@@ -133,8 +133,8 @@ bool Game::save( std::string saveFileName ) {
     // read game private
     fout << unitPrototype_.size() << std::endl;
     for ( int i = 0; i < unitPrototype_.size(); ++i ) {
-        fout << unitPrototype_[i].SimpleObject::getPlace().first
-             << unitPrototype_[i].SimpleObject::getPlace().second
+        fout << unitPrototype_[i].SimpleObject::getPlace()->getCoors().first
+             << unitPrototype_[i].SimpleObject::getPlace()->getCoors().second
              << std::endl;
         fout << unitPrototype_[i].SimpleObject::getName()
              << std::endl;
@@ -185,8 +185,8 @@ bool Game::save( std::string saveFileName ) {
         fout << players_[i].getUnits().size()
              << std::endl;
         for ( auto p : players_[i].getUnits() ) {
-            fout << p.SimpleObject::getPlace().first
-                 << p.SimpleObject::getPlace().second
+            fout << p.SimpleObject::getPlace()->getCoors().first
+                 << p.SimpleObject::getPlace()->getCoors().second
                  << std::endl;
             fout << p.SimpleObject::getName()
                  << std::endl;
@@ -221,8 +221,8 @@ bool Game::save( std::string saveFileName ) {
         fout << players_[i].getBuildings().size()
              << std::endl;
         for ( auto p : players_[i].getBuildings() ) {
-            fout << p.SimpleObject::getPlace().first
-                 << p.SimpleObject::getPlace().second
+            fout << p.SimpleObject::getPlace()->getCoors().first
+                 << p.SimpleObject::getPlace()->getCoors().second
                  << std::endl;
             fout << p.SimpleObject::getName()
                  << std::endl;
