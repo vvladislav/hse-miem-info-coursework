@@ -29,9 +29,7 @@ Map& Map::operator = (const Map& map) {
 const std::vector<Place> Map::operator[] (const int x ) const {
     if ( x < places_.size() )
         return places_[x];
-    else
-        std::cout << "Out of range" << std::endl;
-    return places_[x];
+    return places_[0];
 }
 
 void Map::setPlace( Place place) {

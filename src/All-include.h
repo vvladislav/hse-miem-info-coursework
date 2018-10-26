@@ -3,9 +3,21 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <fstream>
 #include <string>
 #include <vector>
 #include <list>
+
+
+#ifdef _WIN32
+#include <unistd.h>
+
+#endif
+
+#ifdef __unix__ 
+#include <unistd.h>
+
+#endif
 
 
 class Terrain;
@@ -19,5 +31,7 @@ class MovingObject;
 class Building;
 class Unit;
 class ResourceObject;
+
+// enum for colors
 
 #endif // ALL_INCLUDE_H

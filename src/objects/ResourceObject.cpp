@@ -3,7 +3,7 @@
 
 ResourceObject::ResourceObject() {
     value_ = 1;
-    type_ = "No name";
+    type_ = 0;
 }
 
 ResourceObject::ResourceObject(const ResourceObject& resourceObject) {
@@ -31,7 +31,7 @@ int const ResourceObject::getValue() const {
     return value_;
 }
 
-std::string const ResourceObject::getType() const {
+int const ResourceObject::getType() const {
     return type_;
 }
 
@@ -39,7 +39,7 @@ void ResourceObject::setValue( int value ) {
     value_ = value;
 }
 
-void ResourceObject::setType( std::string type ) {
+void ResourceObject::setType( int type ) {
     type_ = type;
 }
 

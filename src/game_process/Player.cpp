@@ -7,6 +7,7 @@ Player::Player() {
     colorPlayer_ = 0;
     choosedUnits_.clear();
     playersUnits_.clear();
+    choosedBuildings_.clear();
     playersBuildings_.clear();
     visiblePlaces_.clear();
 }
@@ -16,8 +17,9 @@ Player::Player(const Player& player) {
     this->name_ = player.getName();
     this->colorPlayer_ = player.getColor();
     this->resource_ = player.getResource();
-    this->choosedUnits_ = player.getChoosed();
+    this->choosedUnits_ = player.getChoosedUnits();
     this->playersUnits_ = player.getUnits();
+    this->choosedBuildings_ = player.getChoosedBuildings();
     this->playersBuildings_ = player.getBuildings();
     this->visiblePlaces_ = player.getVisiblePlaces();
 }
@@ -28,6 +30,7 @@ Player::Player( int id ) {
     colorPlayer_ = 0;
     choosedUnits_.clear();
     playersUnits_.clear();
+    choosedBuildings_.clear();
     playersBuildings_.clear();
     visiblePlaces_.clear();
 }
@@ -56,11 +59,15 @@ std::list<Place*> Player::getVisiblePlaces() const {
     return visiblePlaces_;
 }
 
-const std::list<Unit*> Player::getChoosed() const {
+const std::list<Unit*> Player::getChoosedUnits() const {
     return choosedUnits_;
 }
 
-std::vector<int> Player::getResource() const {
+const std::list<Building*> Player::getChoosedBuildings() const {
+    return choosedBuildings_;
+}
+
+std::vector<std::pair<int,std::string> > Player::getResource() const {
     return resource_;
 }
 
@@ -78,14 +85,22 @@ void Player::setUnits(std::list<Unit> newUnits) {
     playersUnits_ = newUnits;
 }
 
-void Player::setChoosed(std::list<Unit*> choosedUnits) {
+void Player::setChoosedUnits(std::list<Unit*> choosedUnits) {
     choosedUnits_ = choosedUnits;
+}
+
+void Player::setChoosedBuildings(std::list<Building*> choosedBuildings) {
+    choosedBuildings_ = choosedBuildings;
 }
 
 //void setPlaces(std::list<place> visiblePlaces);
 
 void Player::setColor(int const idColor) {
     colorPlayer_ = idColor;
+}
+
+void Player::setResource(std::vector<std::pair<int,std::string> > resource) {
+    resource_ = resource;
 }
 
 void Player::addUnit(Unit newUnit) {
@@ -109,8 +124,12 @@ void Player::removeBuilding(Building& oldBuilding) {
     playersBuildings_.erase(it);
 }
 
-void Player::addChoosed( Unit* chooseUnit) {
+void Player::addChoosedUnit( Unit* chooseUnit) {
     choosedUnits_.push_back( chooseUnit );
+}
+
+void Player::addChoosedBuilding( Building* chooseBuilding) {
+    choosedBuildings_.push_back( chooseBuilding );
 }
 
 void Player::changePlaces(Unit travelUnit) {
@@ -118,9 +137,9 @@ void Player::changePlaces(Unit travelUnit) {
 }
 
 void Player::addResources(int idResource, int quality) {
-    resource_[idResource] += quality;
+    resource_[idResource].second += quality;
 }
 
 void Player::spendResources(int idResource, int quality) {
-    resource_[idResource] -= quality;
+    resource_[idResource].first -= quality;
 }

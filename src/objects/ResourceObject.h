@@ -8,7 +8,7 @@ class ResourceObject : virtual public SimpleObject
 {
     private:
         int value_;
-        std::string type_;
+        int type_;
     public:
         ResourceObject();
         ResourceObject(const ResourceObject& ResourceObject);
@@ -17,10 +17,10 @@ class ResourceObject : virtual public SimpleObject
         ResourceObject& operator+ ( int add );
 
         int const getValue() const ;
-        std::string const getType() const ;
+        int const getType() const ;
 
         void setValue( int value );
-        void setType( std::string type );
+        void setType( int type );
 
         void addValue( int add );
         void rmValue( int rm );

@@ -15,13 +15,14 @@ class MovingObject : virtual public SimpleObject
         MovingObject& operator= ( const MovingObject& movingObject);
 
         int const getSpeed() const ;
+        const std::pair<int,int> getEndPoint() const ;
 
         void setSpeed( int speed );
+        void setEndPoint( int x , int y );
+        void setEndPoint( std::pair<int,int> endPoint );
 
         void addSpeed( int add );
         void rmSpeed( int rm );
-        void move( int x , int y );
-        void move( std::pair<int,int> endPoint );
         bool isMove();
 
 };

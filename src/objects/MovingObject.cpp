@@ -20,8 +20,20 @@ int const MovingObject::getSpeed() const {
     return speed_;
 }
 
+const std::pair<int,int> MovingObject::getEndPoint() const {
+    return endPoint_;
+}
+
 void MovingObject::setSpeed( int speed ) {
     speed_ = speed;
+}
+
+void MovingObject::setEndPoint( int x , int y ) {
+    endPoint_ = std::make_pair(x,y);
+}
+
+void MovingObject::setEndPoint( std::pair<int,int> endPoint ) {
+    endPoint_ = endPoint;
 }
 
 void MovingObject::addSpeed( int add ) {
@@ -32,15 +44,6 @@ void MovingObject::rmSpeed( int rm ) {
     speed_ += rm;
 }
 
-void MovingObject::move( int x , int y ) {
-    endPoint_ = std::make_pair(x,y);
-}
-
-void MovingObject::move( std::pair<int,int> endPoint ) {
-    endPoint_ = endPoint;
-}
-
 bool MovingObject::isMove() {
-    if ( endPoint_ != place_ ) return true;
-    return false;
+    return ( endPoint_ != place_ );
 }
