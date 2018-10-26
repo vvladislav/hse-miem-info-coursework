@@ -22,6 +22,13 @@ SimpleObject& SimpleObject::operator= ( const SimpleObject& simpleObject) {
     return *this;
 }
 
+bool SimpleObject::operator== ( const SimpleObject& simpleObject) const {
+    if ((this->place_      == simpleObject.getPlace()) &&
+        (this->name_   == simpleObject.getName()))
+        return true;
+    return false;
+}
+
 std::pair<int,int> const SimpleObject::getPlace() const {
     return place_;
 }

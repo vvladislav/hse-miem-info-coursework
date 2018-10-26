@@ -17,6 +17,7 @@ class Unit : public MovingObject,
         Unit();
         Unit(const Unit& unit);
         Unit& operator= ( const Unit& unit);
+        bool operator== (const Unit& unit) const;
 
         std::list < Building* > const getRequire() const;
         std::pair<int,int> getId() const;

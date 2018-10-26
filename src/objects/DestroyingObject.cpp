@@ -14,6 +14,14 @@ DestroyingObject& DestroyingObject::operator= ( const DestroyingObject& destroyi
     return *this;
 }
 
+bool DestroyingObject::operator== ( const DestroyingObject& destroyingObject) const {
+    if ((this->health_      == destroyingObject.getHealth()) &&
+        (static_cast< SimpleObject & >(const_cast< DestroyingObject & >(*this)) ==
+             static_cast< SimpleObject & >(const_cast< DestroyingObject & >(destroyingObject))))
+        return true;
+    return false;
+}
+
 DestroyingObject& DestroyingObject::operator- ( int rm ) {
     health_ -= rm;
     return *this;

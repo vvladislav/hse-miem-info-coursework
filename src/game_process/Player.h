@@ -22,6 +22,7 @@ class Player {
         Player();
         Player(const Player& player);
         Player(int const idPlayer);
+        bool operator== (const Player& player) const;
 
         int const getId() const;
         std::string const getName() const;
@@ -32,6 +33,7 @@ class Player {
         const std::list<Unit*> getChoosedUnits() const;
         const std::list<Building*> getChoosedBuildings() const;
         std::vector<std::pair<int,std::string> > getResource() const;
+        bool getStatus() const;
 
         //setPlaces();
         void setId(int const idPlayer);
@@ -42,6 +44,7 @@ class Player {
         //void setPlaces(std::list<place> visiblePlaces);
         void setColor(int const idColor);
         void setResource(std::vector<std::pair<int,std::string> > resource);
+        void setStatus( bool inGame );
 
         void addUnit( Unit newUnit);
         void removeUnit( Unit oldUnit);

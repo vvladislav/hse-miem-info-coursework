@@ -35,6 +35,20 @@ Player::Player( int id ) {
     visiblePlaces_.clear();
 }
 
+bool Player::operator== (const Player& player) const {
+    if ((this->idPlayer_         == player.getId()) &&
+        (this->name_             == player.getName()) &&
+        (this->colorPlayer_      == player.getColor()) &&
+        (this->resource_         == player.getResource()) &&
+        (this->playersUnits_     == player.getUnits()) &&
+        (this->choosedUnits_     == player.getChoosedUnits()) &&
+        (this->choosedBuildings_ == player.getChoosedBuildings()) &&
+        (this->visiblePlaces_    == player.getVisiblePlaces()) &&
+        (this->inGame_           == player.getStatus()) )
+        return true;
+    return false;
+}
+
 int const Player::getId() const {
     return idPlayer_;
 }
@@ -71,6 +85,10 @@ std::vector<std::pair<int,std::string> > Player::getResource() const {
     return resource_;
 }
 
+bool Player::getStatus() const {
+    return inGame_;
+}
+
 //setPlaces();
 
 void Player::setId(int const idPlayer) {
@@ -101,6 +119,10 @@ void Player::setColor(int const idColor) {
 
 void Player::setResource(std::vector<std::pair<int,std::string> > resource) {
     resource_ = resource;
+}
+
+void Player::setStatus( bool inGame ) {
+    inGame_ = inGame;
 }
 
 void Player::addUnit(Unit newUnit) {

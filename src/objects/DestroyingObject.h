@@ -12,6 +12,7 @@ class DestroyingObject : virtual public SimpleObject
         DestroyingObject();
         DestroyingObject(const DestroyingObject& destroyingObject);
         DestroyingObject& operator= ( const DestroyingObject& destroyingObject );
+        bool operator== ( const DestroyingObject& destroyingObject) const;
         DestroyingObject& operator- ( int rm );
         DestroyingObject& operator+ ( int add );
 

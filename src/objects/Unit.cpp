@@ -17,6 +17,19 @@ Unit& Unit::operator= ( const Unit& unit) {
     return *this;
 }
 
+bool Unit::operator== ( const Unit& unit) const {
+    if ((this->id_      == unit.getId()) &&
+        (this->require_ == unit.getRequire()) &&
+        (static_cast< MovingObject & >(const_cast< Unit & >(*this)) ==
+             static_cast< MovingObject & >(const_cast< Unit & >(unit))) &&
+        (static_cast< AttackingObject & >(const_cast< Unit & >(*this)) ==
+             static_cast< AttackingObject & >(const_cast< Unit & >(unit))) &&
+        (static_cast< DestroyingObject & >(const_cast< Unit & >(*this)) ==
+             static_cast< DestroyingObject & >(const_cast< Unit & >(unit))))
+        return true;
+    return false;
+}
+
 std::list < Building* > const Unit::getRequire() const {
     return require_;
 }

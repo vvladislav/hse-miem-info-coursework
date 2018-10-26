@@ -13,6 +13,7 @@ class MovingObject : virtual public SimpleObject
         MovingObject();
         MovingObject(const MovingObject& movingObject);
         MovingObject& operator= ( const MovingObject& movingObject);
+        bool operator== ( const MovingObject& movingObject) const; 
 
         int const getSpeed() const ;
         const std::pair<int,int> getEndPoint() const ;

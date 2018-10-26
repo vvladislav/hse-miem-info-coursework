@@ -16,6 +16,15 @@ MovingObject& MovingObject::operator= ( const MovingObject& movingObject) {
     return *this;
 }
 
+bool MovingObject::operator== ( const MovingObject& movingObject) const {
+    if ((this->speed_      == movingObject.getSpeed()) &&
+        (this->endPoint_   == movingObject.getEndPoint()) &&
+        (static_cast< SimpleObject & >(const_cast< MovingObject & >(*this)) ==
+             static_cast< SimpleObject & >(const_cast< MovingObject & >(movingObject))))
+        return true;
+    return false;
+}
+
 int const MovingObject::getSpeed() const {
     return speed_;
 }

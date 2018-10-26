@@ -13,6 +13,7 @@ class AttackingObject : virtual public SimpleObject
         AttackingObject();
         AttackingObject(const AttackingObject& attackingObject);
         AttackingObject& operator= ( const AttackingObject& attackingObject);
+        bool operator== ( const AttackingObject& attackingObject) const;
 
         int getAttack() const;
         int getRange() const;

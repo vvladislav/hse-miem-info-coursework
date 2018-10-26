@@ -15,6 +15,7 @@ class SimpleObject
         SimpleObject(std::pair<int,int> place);
         SimpleObject(const SimpleObject& simpleObject);
         SimpleObject& operator= ( const SimpleObject& simpleObject);
+        bool operator== ( const SimpleObject& simpleObject) const;
 
         // there are must be function with image
 

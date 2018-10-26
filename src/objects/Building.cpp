@@ -24,6 +24,19 @@ Building& Building::operator= ( const Building& building) {
     return *this;
 }
 
+bool Building::operator== ( const Building& building) const {
+    if ((this->id_      == building.getId()) &&
+        (this->train_   == building.getTrain()) &&
+        (this->training_== building.getTraining()) &&
+        (this->require_ == building.getRequire()) &&
+        (static_cast< AttackingObject & >(const_cast< Building & >(*this)) ==
+             static_cast< AttackingObject & >(const_cast< Building & >(building))) &&
+        (static_cast< DestroyingObject & >(const_cast< Building & >(*this)) ==
+             static_cast< DestroyingObject & >(const_cast< Building & >(building))))
+        return true;
+    return false;
+}
+
 std::list< Unit* > const Building::getTrain() const {
     return train_;
 }

@@ -17,6 +17,15 @@ AttackingObject& AttackingObject::operator= ( const AttackingObject& attackingOb
     return *this;
 }
 
+bool AttackingObject::operator== ( const AttackingObject& attackingObject) const {
+    if ((this->attack_      == attackingObject.getAttack()) &&
+        (this->range_   == attackingObject.getRange()) &&
+        (static_cast< SimpleObject & >(const_cast< AttackingObject & >(*this)) ==
+             static_cast< SimpleObject & >(const_cast< AttackingObject & >(attackingObject))))
+        return true;
+    return false;
+}
+
 int AttackingObject::getAttack() const {
     return attack_;
 }

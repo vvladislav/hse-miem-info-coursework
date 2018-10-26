@@ -17,6 +17,7 @@ class Building : public DestroyingObject, public AttackingObject
         Building();
         Building(const Building& building);
         Building& operator= ( const Building& building);
+        bool operator== (const Building& building) const;
 
         std::list< Unit* > const getTrain() const;
         std::list< Unit* > const getTraining() const;
