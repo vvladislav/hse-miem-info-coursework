@@ -5,12 +5,13 @@ MovingObject::MovingObject():SimpleObject() {
     endPoint_ = SimpleObject::getPlace()->getCoors();
 }
 
-MovingObject::MovingObject(const MovingObject& movingObject) {
+MovingObject::MovingObject(const MovingObject& movingObject):SimpleObject(movingObject) {
     this->speed_ = movingObject.getSpeed(); 
     this->endPoint_ = movingObject.SimpleObject::getPlace()->getCoors();
 }
 
 MovingObject& MovingObject::operator= ( const MovingObject& movingObject) {
+    SimpleObject::operator= (movingObject);
     this->speed_ = movingObject.getSpeed(); 
     this->endPoint_ = movingObject.SimpleObject::getPlace()->getCoors();
     return *this;

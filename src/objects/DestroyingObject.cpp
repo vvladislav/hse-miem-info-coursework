@@ -5,11 +5,12 @@ DestroyingObject::DestroyingObject():SimpleObject() {
     health_ = 1;
 }
 
-DestroyingObject::DestroyingObject(const DestroyingObject& destroyingObject) {
+DestroyingObject::DestroyingObject(const DestroyingObject& destroyingObject): SimpleObject(destroyingObject) {
     this->health_ = destroyingObject.getHealth(); 
 }
 
 DestroyingObject& DestroyingObject::operator= ( const DestroyingObject& destroyingObject) {
+    SimpleObject::operator= (destroyingObject);
     this->health_ = destroyingObject.getHealth(); 
     return *this;
 }

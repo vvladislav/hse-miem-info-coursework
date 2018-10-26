@@ -6,12 +6,13 @@ AttackingObject::AttackingObject():SimpleObject() {
     range_ = 0;
 }
 
-AttackingObject::AttackingObject(const AttackingObject& attackingObject) {
+AttackingObject::AttackingObject(const AttackingObject& attackingObject): SimpleObject(attackingObject) {
     this->attack_ = attackingObject.getAttack(); 
     this->range_ = attackingObject.getRange();
 }
 
 AttackingObject& AttackingObject::operator= ( const AttackingObject& attackingObject) {
+    SimpleObject::operator= (attackingObject);
     this->attack_ = attackingObject.getAttack(); 
     this->range_ = attackingObject.getRange();
     return *this;

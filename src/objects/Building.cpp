@@ -2,14 +2,14 @@
 #include "Building.h"
 #include "AttackingObject.h"
 
-Building::Building():AttackingObject(), DestroyingObject(),SimpleObject()  {
+Building::Building():AttackingObject(), DestroyingObject(), SimpleObject() {
     id_ = std::make_pair(0,0);
     require_.clear();
     train_.clear();
     training_.clear();
 }
 
-Building::Building( const Building& building ) {
+Building::Building( const Building& building ): AttackingObject(building), DestroyingObject(building), SimpleObject(building) {
     this->id_ = building.getId();
     this->require_ = building.getRequire();
     this->train_ = building.getTrain();
@@ -17,6 +17,8 @@ Building::Building( const Building& building ) {
 }
 
 Building& Building::operator= ( const Building& building) {
+    DestroyingObject::operator= (building);
+    SimpleObject::operator= (building);
     this->id_ = building.getId();
     this->require_ = building.getRequire();
     this->train_ = building.getTrain();

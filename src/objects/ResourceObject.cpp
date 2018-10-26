@@ -6,12 +6,13 @@ ResourceObject::ResourceObject() {
     type_ = 0;
 }
 
-ResourceObject::ResourceObject(const ResourceObject& resourceObject) {
+ResourceObject::ResourceObject(const ResourceObject& resourceObject): SimpleObject(resourceObject) {
     this->value_ = resourceObject.getValue();
     this->type_ = resourceObject.getType(); 
 }
 
 ResourceObject& ResourceObject::operator= ( const ResourceObject& resourceObject ) {
+    SimpleObject::operator= (resourceObject);
     this->value_ = resourceObject.getValue();
     this->type_ = resourceObject.getType(); 
     return *this;
