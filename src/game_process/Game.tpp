@@ -150,15 +150,15 @@ bool Game::save( std::string saveFileName ) {
                      << -1
                      << std::endl;
             }
-            fout << map_[i][j].getAttack().size()
+            fout << map_[i][j].getAttackedBy().size()
                  << std::endl;
-            for ( auto k : map_[i][j].getAttack() ) {
+            for ( auto k : map_[i][j].getAttackedBy() ) {
                 fout << k->getId().first
                      << k->getId().second
                      << std::endl;
             }
             // map.terrain
-            fout << map_[i][j].getTerrain().getSpeed() << ' '
+            fout << map_[i][j].getTerrain().getSpeedMultiplier() << ' '
                  << map_[i][j].getTerrain().getPermeability()
                  << std::endl;
         }
@@ -180,20 +180,20 @@ bool Game::save( std::string saveFileName ) {
              << std::endl;
         fout << unitPrototype_[i].MovingObject::getSpeed()
              << std::endl;
-        fout << unitPrototype_[i].MovingObject::getEndPoint().first << ' '
-             << unitPrototype_[i].MovingObject::getEndPoint().second
+        fout << unitPrototype_[i].MovingObject::getDestination().first << ' '
+             << unitPrototype_[i].MovingObject::getDestination().second
              << std::endl;
-        fout << unitPrototype_[i].AttackingObject::getAttack() << ' '
+        fout << unitPrototype_[i].AttackingObject::getDamage() << ' '
              << unitPrototype_[i].AttackingObject::getRange()
              << std::endl;  
-        fout << unitPrototype_[i].DestroyingObject::getHealth() << ' '
+        fout << unitPrototype_[i].DestroyableObject::getHealth() << ' '
              << std::endl;
         fout << unitPrototype_[i].getId().first << ' '
              << unitPrototype_[i].getId().second
              << std::endl;
-        fout << unitPrototype_[i].getRequire().size()
+        fout << unitPrototype_[i].getRequirements().size()
              << std::endl;
-        for ( auto j : unitPrototype_[i].getRequire() ) {
+        for ( auto j : unitPrototype_[i].getRequirements() ) {
             fout << j->getId().second
                  << std::endl;
         }
@@ -213,23 +213,23 @@ bool Game::save( std::string saveFileName ) {
         }
         fout << buildingPrototype_[i].SimpleObject::getName()
              << std::endl;
-        fout << buildingPrototype_[i].AttackingObject::getAttack() << ' '
+        fout << buildingPrototype_[i].AttackingObject::getDamage() << ' '
              << buildingPrototype_[i].AttackingObject::getRange()
              << std::endl;
-        fout << buildingPrototype_[i].DestroyingObject::getHealth()
+        fout << buildingPrototype_[i].DestroyableObject::getHealth()
              << std::endl;
         fout << buildingPrototype_[i].getId().first << ' '
              << buildingPrototype_[i].getId().second
              << std::endl;
-        fout << buildingPrototype_[i].getTrain().size()
+        fout << buildingPrototype_[i].getTrainables().size()
              << std::endl;
-        for ( auto j : buildingPrototype_[i].getTrain() ) {
+        for ( auto j : buildingPrototype_[i].getTrainables() ) {
             fout << j->getId().second
                  << std::endl;
         }
-        fout << buildingPrototype_[i].getRequire().size()
+        fout << buildingPrototype_[i].getRequirements().size()
              << std::endl;
-        for ( auto j : buildingPrototype_[i].getRequire() ) {
+        for ( auto j : buildingPrototype_[i].getRequirements() ) {
             fout << j->getId().second
                  << std::endl;
         }
@@ -251,10 +251,10 @@ bool Game::save( std::string saveFileName ) {
              << std::endl;
         fout << players_[i].getColor()
              << std::endl;
-        for ( int j = 0; j < players_[i].getResource().size(); ++j ) {
-            fout << players_[i].getResource()[j].first
+        for ( int j = 0; j < players_[i].getResources().size(); ++j ) {
+            fout << players_[i].getResources()[j].first
                  << std::endl;
-            fout << players_[i].getResource()[j].second
+            fout << players_[i].getResources()[j].second
                  << std::endl;
         }
         // players.units
@@ -275,20 +275,20 @@ bool Game::save( std::string saveFileName ) {
                  << std::endl;
             fout << p.MovingObject::getSpeed()
                  << std::endl;
-            fout << p.MovingObject::getEndPoint().first << ' '
-                 << p.MovingObject::getEndPoint().second
+            fout << p.MovingObject::getDestination().first << ' '
+                 << p.MovingObject::getDestination().second
                  << std::endl;
-            fout << p.AttackingObject::getAttack() << ' '
+            fout << p.AttackingObject::getDamage() << ' '
                  << p.AttackingObject::getRange()
                  << std::endl;  
-            fout << p.DestroyingObject::getHealth()
+            fout << p.DestroyableObject::getHealth()
                  << std::endl;
             fout << p.getId().first << ' '
                  << p.getId().second
                  << std::endl;
-            fout << p.getRequire().size()
+            fout << p.getRequirements().size()
                  << std::endl;
-            for ( auto j : p.getRequire() ) {
+            for ( auto j : p.getRequirements() ) {
                 fout << j->getId().second
                      << std::endl;
             }
@@ -317,17 +317,17 @@ bool Game::save( std::string saveFileName ) {
             }
             fout << p.SimpleObject::getName()
                  << std::endl;
-            fout << p.AttackingObject::getAttack() << ' '
+            fout << p.AttackingObject::getDamage() << ' '
                  << p.AttackingObject::getRange()
                  << std::endl;  
-            fout << p.DestroyingObject::getHealth()
+            fout << p.DestroyableObject::getHealth()
                  << std::endl;
             fout << p.getId().first << ' '
                  << p.getId().second
                  << std::endl;
-            fout << p.getTrain().size()
+            fout << p.getTrainables().size()
                  << std::endl;
-            for ( auto j : p.getTrain() ) {
+            for ( auto j : p.getTrainables() ) {
                 fout << j->getId().second
                      << std::endl;
             }
@@ -337,14 +337,15 @@ bool Game::save( std::string saveFileName ) {
                 fout << j->getId().second
                      << std::endl;
             }
-            fout << p.getRequire().size()
+            fout << p.getRequirements().size()
                  << std::endl;
-            for ( auto j : p.getRequire() ) {
+            for ( auto j : p.getRequirements() ) {
                 fout << j->getId().second
                      << std::endl;
             }
         }
     }
+    // add resource object and other
     return true;
 }
 

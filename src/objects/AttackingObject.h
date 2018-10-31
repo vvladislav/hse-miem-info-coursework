@@ -7,7 +7,7 @@
 class AttackingObject : virtual public SimpleObject
 {
     protected:
-        int attack_;
+        int damage_;
         int range_;
     public:
         AttackingObject();
@@ -15,10 +15,10 @@ class AttackingObject : virtual public SimpleObject
         AttackingObject& operator= ( const AttackingObject& attackingObject);
         bool operator== ( const AttackingObject& attackingObject) const;
 
-        int getAttack() const;
+        int getDamage() const;
         int getRange() const;
 
-        void setAttack( int const power );
+        void setDamage( int const power );
         void setRange( int const range );
 
 };

@@ -3,36 +3,36 @@
 
 #include "All-include.h"
 #include "AttackingObject.h"
-#include "DestroyingObject.h"
+#include "DestroyableObject.h"
 #include "Unit.h"
 
-class Building : public DestroyingObject, public AttackingObject
+class Building : public DestroyableObject, public AttackingObject
 {
     private:
-        std::list< Unit* > train_;
+        std::list< Unit* > trainables_;
         std::list< Unit* > training_;
-        std::list < Building* > require_;
+        std::list < Building* > requirements_;
     public:
         Building();
         Building(const Building& building);
         Building& operator= ( const Building& building);
         bool operator== (const Building& building) const;
 
-        std::list< Unit* > const getTrain() const;
+        std::list< Unit* > const getTrainables() const;
         std::list< Unit* > const getTraining() const;
-        std::list < Building* > const getRequire() const;
+        std::list < Building* > const getRequirements() const;
 
-        void setTrain(std::list< Unit* > train);
+        void setTrainables(std::list< Unit* > trainables);
         void setTraining(std::list< Unit* > training);
-        void setRequire(std::list< Building* > require);
+        void setRequirements(std::list< Building* > requirements);
 
-        void addTrain(Unit* train);
-        void rmTrain(int idRm);
+        void addTrainables(Unit* trainables);
+        void rmTrainables(int idRm);
         void addTraining(Unit* train);
         void rmTraining( int idRm );
-        void addRequire( Building*  add);
-        void rmRequire( int idRm);
-        bool hasRequire();
+        void addRequirements( Building*  add);
+        void rmRequirements( int idRm);
+        bool hasRequirements();
 };
 
 #endif // BUILDING_H

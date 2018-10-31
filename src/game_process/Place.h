@@ -9,7 +9,7 @@ class Place
     private:
         std::pair<int,int> coors_;
         SimpleObject* object_ = nullptr;
-        std::list<AttackingObject*> attack_;
+        std::list<AttackingObject*> attackedBy_; // think about it;
         Terrain ter_;
     public:
         Place();
@@ -20,12 +20,12 @@ class Place
         Place( int x, int y , Terrain ter);
         
         std::pair< int , int > const getCoors() const;
-        std::list<AttackingObject*> getAttack() const;
+        std::list<AttackingObject*> getAttackedBy() const;
         const Terrain& getTerrain() const;
         const SimpleObject* getObject() const;
 
-        void setAttack(std::list<AttackingObject*> object);
-        void setAttack(AttackingObject &object);
+        void setAttackedBy(std::list<AttackingObject*> object);
+        void setAttackedBy(AttackingObject &object);
         void setTerrain( Terrain& ter);
         void setObject(SimpleObject* newObject);
 

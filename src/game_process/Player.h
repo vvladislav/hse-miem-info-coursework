@@ -7,10 +7,10 @@
 
 class Player {
     private:
-        int idPlayer_;
+        int id_;
         std::string name_;
-        int colorPlayer_;
-        std::vector<std::pair<int,std::string> > resource_;
+        int color_;
+        std::vector<std::pair<int,std::string> > resources_;
         std::list<Unit> playersUnits_;
         std::list<Unit*> choosedUnits_;
         std::list<Building> playersBuildings_;
@@ -21,7 +21,7 @@ class Player {
     public:
         Player();
         Player(const Player& player);
-        Player(int const idPlayer);
+        Player(int const id);
         bool operator== (const Player& player) const;
 
         int const getId() const;
@@ -32,18 +32,18 @@ class Player {
         std::list<Place*> getVisiblePlaces() const; 
         const std::list<Unit*> getChoosedUnits() const;
         const std::list<Building*> getChoosedBuildings() const;
-        std::vector<std::pair<int,std::string> > getResource() const;
+        std::vector<std::pair<int,std::string> > getResources() const;
         bool getStatus() const;
 
         //setPlaces();
-        void setId(int const idPlayer);
+        void setId(int const id);
         void setName(const std::string name);
         void setUnits(std::list<Unit> newUnits);
         void setChoosedUnits(std::list<Unit*> chooseUnits);
         void setChoosedBuildings(std::list<Building*> chooseBuildings);
         //void setPlaces(std::list<place> visiblePlaces);
         void setColor(int const idColor);
-        void setResource(std::vector<std::pair<int,std::string> > resource);
+        void setResources(std::vector<std::pair<int,std::string> > resources);
         void setStatus( bool inGame );
 
         void addUnit( Unit newUnit);
@@ -54,8 +54,8 @@ class Player {
         void addChoosedBuilding( Building* chooseBuilding );
         void changePlaces( Unit travelUnit);
         void changePlaces(std::list<Unit*> travelUnits );
-        void addResources(int idResource, int quality);
-        void spendResources(int idResource, int quality);
+        void addResources(int idResources, int quality);
+        void spendResources(int idResources, int quality);
 
 };
 

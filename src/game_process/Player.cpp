@@ -2,9 +2,9 @@
 #include "Player.h"
 
 Player::Player() {
-    idPlayer_ = 0;
+    id_ = 0;
     name_ = "No name";
-    colorPlayer_ = 0;
+    color_ = 0;
     choosedUnits_.clear();
     playersUnits_.clear();
     choosedBuildings_.clear();
@@ -13,10 +13,10 @@ Player::Player() {
 }
 
 Player::Player(const Player& player) {
-    this->idPlayer_ = player.getId();
+    this->id_ = player.getId();
     this->name_ = player.getName();
-    this->colorPlayer_ = player.getColor();
-    this->resource_ = player.getResource();
+    this->color_ = player.getColor();
+    this->resources_ = player.getResources();
     this->choosedUnits_ = player.getChoosedUnits();
     this->playersUnits_ = player.getUnits();
     this->choosedBuildings_ = player.getChoosedBuildings();
@@ -25,9 +25,9 @@ Player::Player(const Player& player) {
 }
 
 Player::Player( int id ) {
-    idPlayer_ = id;
+    id_ = id;
     name_ = "No name";
-    colorPlayer_ = 0;
+    color_ = 0;
     choosedUnits_.clear();
     playersUnits_.clear();
     choosedBuildings_.clear();
@@ -36,10 +36,10 @@ Player::Player( int id ) {
 }
 
 bool Player::operator== (const Player& player) const {
-    if ((this->idPlayer_         == player.getId()) &&
+    if ((this->id_         == player.getId()) &&
         (this->name_             == player.getName()) &&
-        (this->colorPlayer_      == player.getColor()) &&
-        (this->resource_         == player.getResource()) &&
+        (this->color_      == player.getColor()) &&
+        (this->resources_         == player.getResources()) &&
         (this->playersUnits_     == player.getUnits()) &&
         (this->choosedUnits_     == player.getChoosedUnits()) &&
         (this->choosedBuildings_ == player.getChoosedBuildings()) &&
@@ -50,7 +50,7 @@ bool Player::operator== (const Player& player) const {
 }
 
 int const Player::getId() const {
-    return idPlayer_;
+    return id_;
 }
 
 std::string const Player::getName() const {
@@ -58,7 +58,7 @@ std::string const Player::getName() const {
 }
 
 int const Player::getColor() const {
-    return colorPlayer_;
+    return color_;
 }
 
 std::list<Unit> Player::getUnits() const {
@@ -81,8 +81,8 @@ const std::list<Building*> Player::getChoosedBuildings() const {
     return choosedBuildings_;
 }
 
-std::vector<std::pair<int,std::string> > Player::getResource() const {
-    return resource_;
+std::vector<std::pair<int,std::string> > Player::getResources() const {
+    return resources_;
 }
 
 bool Player::getStatus() const {
@@ -91,8 +91,8 @@ bool Player::getStatus() const {
 
 //setPlaces();
 
-void Player::setId(int const idPlayer) {
-    idPlayer_ = idPlayer;
+void Player::setId(int const id) {
+    id_ = id;
 }
 
 void Player::setName(const std::string name) {
@@ -114,11 +114,11 @@ void Player::setChoosedBuildings(std::list<Building*> choosedBuildings) {
 //void setPlaces(std::list<place> visiblePlaces);
 
 void Player::setColor(int const idColor) {
-    colorPlayer_ = idColor;
+    color_ = idColor;
 }
 
-void Player::setResource(std::vector<std::pair<int,std::string> > resource) {
-    resource_ = resource;
+void Player::setResources(std::vector<std::pair<int,std::string> > resources) {
+    resources_ = resources;
 }
 
 void Player::setStatus( bool inGame ) {
@@ -136,7 +136,7 @@ void Player::removeUnit(Unit oldUnit) {
 }
 
 void Player::addBuilding( Building newBuilding) {
-    newBuilding.setId( std::make_pair(idPlayer_ , playersUnits_.size()) );
+    newBuilding.setId( std::make_pair(id_ , playersUnits_.size()) );
     playersBuildings_.push_back(newBuilding);
 }
 
@@ -158,10 +158,10 @@ void Player::changePlaces(Unit travelUnit) {
     // create with time
 }
 
-void Player::addResources(int idResource, int quality) {
-    resource_[idResource].second += quality;
+void Player::addResources(int idResources, int quality) {
+    resources_[idResources].second += quality;
 }
 
-void Player::spendResources(int idResource, int quality) {
-    resource_[idResource].first -= quality;
+void Player::spendResources(int idResources, int quality) {
+    resources_[idResources].first -= quality;
 }

@@ -5,7 +5,7 @@
 
 class Terrain {
     private:
-        int speed_ = 1;
+        int speedMultiplier_ = 1;
         int permeability_ = 1;
         // image
     public:
@@ -13,13 +13,13 @@ class Terrain {
         Terrain& operator= (const Terrain& ter);
         Terrain( Terrain& ter );
 
-        int getSpeed() const;
+        int getSpeedMultiplier() const;
         int getPermeability() const;
 
-        void setSpeed( int const speed );
+        void setSpeedMultiplier( int const speedMultiplier );
         void setPermeability( int const permeability );
 
-        void changeSpeed( int const proportion );
+        void changeSpeedMultiplier( int const proportion );
         void changePermeability( int const proportion );
 
 };

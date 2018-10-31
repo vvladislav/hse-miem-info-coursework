@@ -8,7 +8,7 @@ class MovingObject : virtual public SimpleObject
 {
     protected:
         int speed_ = 0;
-        std::pair<int,int> endPoint_;
+        std::pair<int,int> destination_;
     public:
         MovingObject();
         MovingObject(const MovingObject& movingObject);
@@ -16,11 +16,11 @@ class MovingObject : virtual public SimpleObject
         bool operator== ( const MovingObject& movingObject) const; 
 
         int const getSpeed() const ;
-        const std::pair<int,int> getEndPoint() const ;
+        const std::pair<int,int> getDestination() const ;
 
         void setSpeed( int speed );
-        void setEndPoint( int x , int y );
-        void setEndPoint( std::pair<int,int> endPoint );
+        void setDestination( int x , int y );
+        void setDestination( std::pair<int,int> destination );
 
         void addSpeed( int add );
         void rmSpeed( int rm );
