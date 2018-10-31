@@ -6,17 +6,17 @@ TEMPLATE = app
 TARGET = strategy
 QT += gui widgets
 INCLUDEPATH += src/ src/game_process src/objects .
-DESTDIR = bin
-QMAKE_EXTRA_TARGETS += mkswp
-mkswp.target = .swp
+DESTDIR = bin/
+mkswp.target = .tmp
 mkswp.commands = mkdir
+QT_EXTRA_TARGET += mktmp
 unix{
 TARGET = strategy.out
 }
 else{
 TARGET = strategy.exe
 }
-OBJECTS_DIR = .swp
+OBJECTS_DIR = .tmp
 
 # The following define makes your compiler warn you if you use any
 # feature of Qt which has been marked as deprecated (the exact warnings
