@@ -7,7 +7,7 @@
 *.toc
 
 # Ignore tmp files
-*.swp
+*.tmp
 
 # Ignore binary files
 *.out
