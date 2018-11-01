@@ -8,20 +8,23 @@ class MovingObject : virtual public SimpleObject
 {
     protected:
         int speed_ = 0;
-        std::pair<int,int> endPoint_;
+        std::pair<int,int> destination_;
     public:
-        //MovingObject(): SimpleObject(){};
-        //MovingObject(std::pair<int,int> place): SimpleObject(place){};
+        MovingObject();
+        MovingObject(const MovingObject& movingObject);
+        MovingObject& operator= ( const MovingObject& movingObject);
+        bool operator== ( const MovingObject& movingObject) const; 
 
-        virtual int const getSpeed() const ;
+        int const getSpeed() const ;
+        const std::pair<int,int> getDestination() const ;
 
-        virtual void setSpeed( int speed );
+        void setSpeed( int speed );
+        void setDestination( int x , int y );
+        void setDestination( std::pair<int,int> destination );
 
-        virtual void addSpeed( int add );
-        virtual void rmSpeed( int rm );
-        virtual void move( int x , int y );
-        virtual void move( std::pair<int,int> endPoint );
-        virtual bool isMove();
+        void addSpeed( int add );
+        void rmSpeed( int rm );
+        bool isMove();
 
 };
 

@@ -7,17 +7,19 @@
 class AttackingObject : virtual public SimpleObject
 {
     protected:
-        int power_ = 0;
-        int range_ = 0;
+        int damage_;
+        int range_;
     public:
-       //AttachikgObject(): SimpleObject(){};
-       //AttachikgObject(std::pair<int,int> place): SimpleObject(place){};
+        AttackingObject();
+        AttackingObject(const AttackingObject& attackingObject);
+        AttackingObject& operator= ( const AttackingObject& attackingObject);
+        bool operator== ( const AttackingObject& attackingObject) const;
 
-       int getAttack() const;
-       int getRange() const;
+        int getDamage() const;
+        int getRange() const;
 
-       void setAttack( int const power );
-       void setRange( int const range );
+        void setDamage( int const power );
+        void setRange( int const range );
 
 };
 

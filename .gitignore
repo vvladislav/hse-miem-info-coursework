@@ -6,7 +6,7 @@
 *.synctex
 *.toc
 
-# Ignore tmp vim files
+# Ignore tmp files
 *.swp
 
 # Ignore binary files
@@ -16,3 +16,9 @@
 
 # Ignore vim files
 *.vimrc
+
+#ignore qt files
+*.pro.user
+
+#ignore qmake files
+*.stash

@@ -3,30 +3,28 @@
 
 #include "All-include.h"
 #include "MovingObject.h"
-#include "DestroyingObject.h"
+#include "DestroyableObject.h"
 #include "AttackingObject.h"
 
 class Unit : public MovingObject,
-             public DestroyingObject,
+             public DestroyableObject,
              public AttackingObject
 {
     private:
-        std::pair< int , int > id_; // < player's id, id in vector >
-        std::vector < Building* > require_;
+        std::list < Building* > requirements_;
     public:
-        //Unit():SimpleObject(){};
-        //Unit(std::pair<int,int> place): SimpleObject(place){};
+        Unit();
+        Unit(const Unit& unit);
         Unit& operator= ( const Unit& unit);
+        bool operator== (const Unit& unit) const;
 
-        std::vector < Building* > const getRequire() const;
-        std::pair<int,int> getId() const;
+        std::list < Building* > const getRequirements() const;
 
-        void setRequire(std::vector< Building* > require);
-        void setId( std::pair<int,int> id );
+        void setRequirements(std::list< Building* > requirements);
 
-        void addRequire( Building* add);
-        void rmRequire( int idRm );
-        bool hasRequire();
+        void addRequirements( Building* add);
+        void rmRequirements( int idRm );
+        bool hasRequirements();
 
 };
 

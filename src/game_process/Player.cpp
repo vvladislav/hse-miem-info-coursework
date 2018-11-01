@@ -2,40 +2,55 @@
 #include "Player.h"
 
 Player::Player() {
-    idPlayer_ = 0;
-    name_ = "";
-    colorPlayer_ = 0;
-    //resource_.resize();
-    choosedUnits_.resize(0);
-    playersUnits_.resize(0);
-    playersBuildings_.resize(0);
-    visiblePlaces_.resize(0);
+    id_ = 0;
+    name_ = "No name";
+    color_ = 0;
+    choosedUnits_.clear();
+    playersUnits_.clear();
+    choosedBuildings_.clear();
+    playersBuildings_.clear();
+    visiblePlaces_.clear();
 }
 
 Player::Player(const Player& player) {
-    this->idPlayer_ = player.getId();
+    this->id_ = player.getId();
     this->name_ = player.getName();
-    this->colorPlayer_ = player.getColor();
-    this->resource_ = player.getResource();
-    this->choosedUnits_ = player.getChoosed();
+    this->color_ = player.getColor();
+    this->resources_ = player.getResources();
+    this->choosedUnits_ = player.getChoosedUnits();
     this->playersUnits_ = player.getUnits();
+    this->choosedBuildings_ = player.getChoosedBuildings();
     this->playersBuildings_ = player.getBuildings();
     this->visiblePlaces_ = player.getVisiblePlaces();
 }
 
 Player::Player( int id ) {
-    idPlayer_ = id;
-    name_ = "";
-    colorPlayer_ = 0;
-    //resource_.resize();
-    choosedUnits_.resize(0);
-    playersUnits_.resize(0);
-    playersBuildings_.resize(0);
-    visiblePlaces_.resize(0);
+    id_ = id;
+    name_ = "No name";
+    color_ = 0;
+    choosedUnits_.clear();
+    playersUnits_.clear();
+    choosedBuildings_.clear();
+    playersBuildings_.clear();
+    visiblePlaces_.clear();
+}
+
+bool Player::operator== (const Player& player) const {
+    if ((this->id_         == player.getId()) &&
+        (this->name_             == player.getName()) &&
+        (this->color_      == player.getColor()) &&
+        (this->resources_         == player.getResources()) &&
+        (this->playersUnits_     == player.getUnits()) &&
+        (this->choosedUnits_     == player.getChoosedUnits()) &&
+        (this->choosedBuildings_ == player.getChoosedBuildings()) &&
+        (this->visiblePlaces_    == player.getVisiblePlaces()) &&
+        (this->inGame_           == player.getStatus()) )
+        return true;
+    return false;
 }
 
 int const Player::getId() const {
-    return idPlayer_;
+    return id_;
 }
 
 std::string const Player::getName() const {
@@ -43,51 +58,71 @@ std::string const Player::getName() const {
 }
 
 int const Player::getColor() const {
-    return colorPlayer_;
+    return color_;
 }
 
-std::vector<Unit> Player::getUnits() const {
+std::list<Unit> Player::getUnits() const {
     return playersUnits_;
 }
 
-std::vector<Building> Player::getBuildings() const {
+std::list<Building> Player::getBuildings() const {
     return playersBuildings_;
 }
 
-std::vector<Place*> Player::getVisiblePlaces() const {
+std::list<Place*> Player::getVisiblePlaces() const {
     return visiblePlaces_;
 }
 
-const std::vector<Unit*> Player::getChoosed() const {
+const std::list<Unit*> Player::getChoosedUnits() const {
     return choosedUnits_;
 }
 
-std::vector<int> Player::getResource() const {
-    return resource_;
+const std::list<Building*> Player::getChoosedBuildings() const {
+    return choosedBuildings_;
+}
+
+std::vector<std::pair<int,std::string> > Player::getResources() const {
+    return resources_;
+}
+
+bool Player::getStatus() const {
+    return inGame_;
 }
 
 //setPlaces();
 
-void Player::setId(int const idPlayer) {
-    idPlayer_ = idPlayer;
+void Player::setId(int const id) {
+    id_ = id;
 }
 
 void Player::setName(const std::string name) {
     name_ = name;
 }
 
-void Player::setUnits(std::vector<Unit> newUnits) {
+void Player::setUnits(std::list<Unit> newUnits) {
     playersUnits_ = newUnits;
 }
 
-void Player::setChoosed(std::vector<Unit*> choosedUnits) {
+void Player::setChoosedUnits(std::list<Unit*> choosedUnits) {
     choosedUnits_ = choosedUnits;
 }
 
-//void setPlaces(std::vector<place> visiblePlaces);
+void Player::setChoosedBuildings(std::list<Building*> choosedBuildings) {
+    choosedBuildings_ = choosedBuildings;
+}
+
+//void setPlaces(std::list<place> visiblePlaces);
 
 void Player::setColor(int const idColor) {
-    colorPlayer_ = idColor;
+    color_ = idColor;
+}
+
+void Player::setResources(std::vector<std::pair<int,std::string> > resources) {
+    resources_ = resources;
+}
+
+void Player::setStatus( bool inGame ) {
+    inGame_ = inGame;
 }
 
 void Player::addUnit(Unit newUnit) {
@@ -95,42 +130,38 @@ void Player::addUnit(Unit newUnit) {
 }
 
 void Player::removeUnit(Unit oldUnit) {
-    playersUnits_.erase(playersUnits_.begin() + oldUnit.getId().second);
+    auto it = playersUnits_.begin();
+    std::advance( it, oldUnit.getId().second );
+    playersUnits_.erase(it);
 }
 
 void Player::addBuilding( Building newBuilding) {
-    newBuilding.setId( std::make_pair(idPlayer_ , playersUnits_.size()) );
+    newBuilding.setId( std::make_pair(id_ , playersUnits_.size()) );
     playersBuildings_.push_back(newBuilding);
 }
 
 void Player::removeBuilding(Building& oldBuilding) {
-    playersBuildings_.erase(playersBuildings_.begin() + oldBuilding.getId().second);
+    auto it = playersBuildings_.begin();
+    std::advance( it , oldBuilding.getId().second );
+    playersBuildings_.erase(it);
 }
 
-void Player::removeBuilding( int oldBuilding) {
-    playersBuildings_.erase(playersBuildings_.begin() + oldBuilding);
+void Player::addChoosedUnit( Unit* chooseUnit) {
+    choosedUnits_.push_back( chooseUnit );
 }
 
-void Player::addIdChoosed(int chooseUnit) {
-    choosedUnits_.push_back(&(getUnits()[chooseUnit]));
-}
-
-void Player::addIdChoosed(std::vector<Unit*> chooseUnit) {
-    choosedUnits_.insert(std::end(choosedUnits_), std::begin(chooseUnit), std::end(chooseUnit));
+void Player::addChoosedBuilding( Building* chooseBuilding) {
+    choosedBuildings_.push_back( chooseBuilding );
 }
 
 void Player::changePlaces(Unit travelUnit) {
     // create with time
 }
 
-void Player::changePlaces(std::vector<Unit*> travelUnits ) {
-    // create with time
+void Player::addResources(int idResources, int quality) {
+    resources_[idResources].second += quality;
 }
 
-void Player::addResources(int idResource, int quality) {
-    resource_[idResource] += quality;
-}
-
-void Player::spendResources(int idResource, int quality) {
-    resource_[idResource] -= quality;
+void Player::spendResources(int idResources, int quality) {
+    resources_[idResources].first -= quality;
 }

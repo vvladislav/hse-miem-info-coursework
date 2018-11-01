@@ -1,37 +1,53 @@
 #include "All-include.h"
 #include "Unit.h"
 
-std::vector < Building* > const Unit::getRequire() const {
-    return require_;
+Unit::Unit():MovingObject(), AttackingObject(), DestroyableObject(), SimpleObject() {
+    requirements_.clear();
 }
 
-std::pair<int,int> Unit::getId() const {
-    return id_;
+Unit::Unit(const Unit& unit):MovingObject(unit), AttackingObject(unit), DestroyableObject(unit), SimpleObject() {
+    this->requirements_ = unit.getRequirements();
 }
 
 Unit& Unit::operator= ( const Unit& unit) {
-    this->id_ = unit.getId();
-    this->require_ = unit.getRequire();
-    this->place_ = unit.MovingObject::SimpleObject::getPlace();
+    MovingObject::operator= (unit);
+    DestroyableObject::operator= (unit);
+    AttackingObject::operator= (unit);
+    SimpleObject::operator= (unit);
+    this->requirements_ = unit.getRequirements();
     return *this;
 }
 
-void Unit::setRequire( std::vector< Building* > require ) {
-    require_ = require;
+bool Unit::operator== ( const Unit& unit) const {
+    if ((this->requirements_ == unit.getRequirements()) &&
+        (static_cast< MovingObject & >(const_cast< Unit & >(*this)) ==
+             static_cast< MovingObject & >(const_cast< Unit & >(unit))) &&
+        (static_cast< AttackingObject & >(const_cast< Unit & >(*this)) ==
+             static_cast< AttackingObject & >(const_cast< Unit & >(unit))) &&
+        (static_cast< DestroyableObject & >(const_cast< Unit & >(*this)) ==
+             static_cast< DestroyableObject & >(const_cast< Unit & >(unit))))
+        return true;
+    return false;
 }
 
-void Unit::setId( std::pair<int,int> id ) {
-    id_ = id;
+std::list < Building* > const Unit::getRequirements() const {
+    return requirements_;
 }
 
-void Unit::addRequire( Building* add) {
-    require_.push_back( add );
+void Unit::setRequirements( std::list< Building* > requirements ) {
+    requirements_ = requirements;
 }
 
-void Unit::rmRequire( int idRm ) {
-    require_.erase(require_.begin() + idRm);
+void Unit::addRequirements( Building* add) {
+    requirements_.push_back( add );
 }
 
-bool Unit::hasRequire() {
-    return require_.size();
+void Unit::rmRequirements( int idRm ) {
+    auto it = requirements_.begin();
+    std::advance( it ,idRm);
+    requirements_.erase(it);
+}
+
+bool Unit::hasRequirements() {
+    return requirements_.size();
 }

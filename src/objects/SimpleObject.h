@@ -3,25 +3,33 @@
 
 #include "All-include.h"
 #include "Place.h"
+#include "Map.h"
 
 class SimpleObject
 {
     protected:
-        std::pair<int,int> place_;
+        std::pair< int , int > id_; // player's id, id in list
+        Place* place_;
         std::string name_;
         // there are must be image
     public:
         SimpleObject();
-        SimpleObject(std::pair<int,int> place);
+        SimpleObject(Place* place);
+        SimpleObject(const SimpleObject& simpleObject);
         SimpleObject& operator= ( const SimpleObject& simpleObject);
+        bool operator== ( const SimpleObject& simpleObject) const;
 
         // there are must be function with image
 
-        std::pair<int,int> const getPlace() const;
+        Place* const getPlace() const;
         std::string const getName() const;
+        std::pair<int,int> getId() const;
 
-        void setPlace( std::pair<int,int> place);
+        void setPlace( Place* place);
         void setName( std::string name);
+        void setId( std::pair<int,int> id );
+
+        ~SimpleObject();
 
 };
 

@@ -7,50 +7,55 @@
 
 class Player {
     private:
-        int idPlayer_;
+        int id_;
         std::string name_;
-        int colorPlayer_;
-        std::vector<int> resource_;
-        std::vector<int> choosed_;
-        std::vector<Unit> playersUnits_;
-        std::vector<Unit*> choosedUnits_; // maybe add for building
-        std::vector<Building> playersBuildings_;
-        std::vector<Place*> visiblePlaces_; // id
+        int color_;
+        std::vector<std::pair<int,std::string> > resources_;
+        std::list<Unit> playersUnits_;
+        std::list<Unit*> choosedUnits_;
+        std::list<Building> playersBuildings_;
+        std::list<Building*> choosedBuildings_;
+        std::list<Place*> visiblePlaces_; 
+        bool inGame_;
         
     public:
         Player();
         Player(const Player& player);
-        Player(int const idPlayer);
+        Player(int const id);
+        bool operator== (const Player& player) const;
 
         int const getId() const;
         std::string const getName() const;
         int const getColor() const;
-        std::vector<Unit> getUnits() const;
-        std::vector<Building> getBuildings() const;
-        std::vector<Place*> getVisiblePlaces() const; 
-        const std::vector<Unit*> getChoosed() const;
-        std::vector<int> getResource() const;
+        std::list<Unit> getUnits() const;
+        std::list<Building> getBuildings() const;
+        std::list<Place*> getVisiblePlaces() const; 
+        const std::list<Unit*> getChoosedUnits() const;
+        const std::list<Building*> getChoosedBuildings() const;
+        std::vector<std::pair<int,std::string> > getResources() const;
+        bool getStatus() const;
 
         //setPlaces();
-        void setId(int const idPlayer);
+        void setId(int const id);
         void setName(const std::string name);
-        void setUnits(std::vector<Unit> newUnits);
-        void setChoosed(std::vector<Unit*> chooseUnits);
-        //void setPlaces(std::vector<place> visiblePlaces);
+        void setUnits(std::list<Unit> newUnits);
+        void setChoosedUnits(std::list<Unit*> chooseUnits);
+        void setChoosedBuildings(std::list<Building*> chooseBuildings);
+        //void setPlaces(std::list<place> visiblePlaces);
         void setColor(int const idColor);
+        void setResources(std::vector<std::pair<int,std::string> > resources);
+        void setStatus( bool inGame );
 
         void addUnit( Unit newUnit);
         void removeUnit( Unit oldUnit);
         void addBuilding( Building newBuilding);
         void removeBuilding( Building& oldBuilding);
-        void removeBuilding( int oldBuilding);
-        void addIdChoosed(int chooseUnit);
-        void addIdChoosed(std::vector<Unit*> chooseUnit);
-        // think about choose buildings
+        void addChoosedUnit( Unit* chooseUnit );
+        void addChoosedBuilding( Building* chooseBuilding );
         void changePlaces( Unit travelUnit);
-        void changePlaces(std::vector<Unit*> travelUnits );
-        void addResources(int idResource, int quality);
-        void spendResources(int idResource, int quality);
+        void changePlaces(std::list<Unit*> travelUnits );
+        void addResources(int idResources, int quality);
+        void spendResources(int idResources, int quality);
 
 };
 

@@ -1,53 +1,72 @@
 #include "All-include.h"
 #include "Building.h"
+#include "AttackingObject.h"
+
+Building::Building():AttackingObject(), DestroyableObject(), SimpleObject() {
+    requirements_.clear();
+    trainables_.clear();
+    training_.clear();
+}
+
+Building::Building( const Building& building ): AttackingObject(building), DestroyableObject(building), SimpleObject(building) {
+    this->requirements_ = building.getRequirements();
+    this->trainables_ = building.getTrainables();
+    this->training_ = building.getTraining();
+}
 
 Building& Building::operator= ( const Building& building) {
-    this->id_ = building.getId();
-    this->require_ = building.getRequire();
-    this->place_ = building.getPlace();
-    this->train_ = building.getTrain();
+    DestroyableObject::operator= (building);
+    SimpleObject::operator= (building);
+    this->requirements_ = building.getRequirements();
+    this->trainables_ = building.getTrainables();
     this->training_ = building.getTraining();
     return *this;
 }
 
-std::vector< Unit* > const Building::getTrain() const {
-    return train_;
+bool Building::operator== ( const Building& building) const {
+    if ((this->trainables_   == building.getTrainables()) &&
+        (this->training_== building.getTraining()) &&
+        (this->requirements_ == building.getRequirements()) &&
+        (static_cast< AttackingObject & >(const_cast< Building & >(*this)) ==
+             static_cast< AttackingObject & >(const_cast< Building & >(building))) &&
+        (static_cast< DestroyableObject & >(const_cast< Building & >(*this)) ==
+             static_cast< DestroyableObject & >(const_cast< Building & >(building))))
+        return true;
+    return false;
 }
 
-std::vector< Unit* > const Building::getTraining() const {
+std::list< Unit* > const Building::getTrainables() const {
+    return trainables_;
+}
+
+std::list< Unit* > const Building::getTraining() const {
     return training_;
 }
 
-std::vector < Building* > const Building::getRequire() const {
-    return require_;
+std::list < Building* > const Building::getRequirements() const {
+    return requirements_;
 }
 
-std::pair<int,int> Building::getId() const {
-    return id_;
+void Building::setTrainables(std::list< Unit* > trainables) {
+    trainables_ = trainables;
 }
 
-void Building::setTrain(std::vector< Unit* > train) {
-    train_ = train;
-}
-
-void Building::setTraining(std::vector< Unit* > training) {
+void Building::setTraining(std::list< Unit* > training) {
     training_ = training;
 }
 
-void Building::setRequire(std::vector< Building* > require) {
-    require_ = require;
+void Building::setRequirements(std::list< Building* > requirements) {
+    requirements_ = requirements;
 }
 
-void Building::setId( std::pair<int,int> id ) {
-    id_ = id;
+void Building::addTrainables(Unit* add) {
+    trainables_.push_back( add );
 }
 
-void Building::addTrain(Unit* add) {
-    train_.push_back( add );
-}
-
-void Building::rmTrain( int idRm) {
-    train_.erase(train_.begin() + idRm);
+void Building::rmTrainables( int idRm) {
+    auto it = trainables_.begin();
+    std::advance( it , idRm);
+    trainables_.erase(it);
 }
 
 void Building::addTraining(Unit* add ) {
@@ -55,17 +74,21 @@ void Building::addTraining(Unit* add ) {
 }
 
 void Building::rmTraining( int idRm ) {
-    training_.erase(training_.begin() + idRm);
+    auto it = training_.begin();
+    std::advance( it , idRm);
+    training_.erase(it);
 }
 
-void Building::addRequire( Building* add) {
-    require_.push_back( add );
+void Building::addRequirements( Building* add) {
+    requirements_.push_back( add );
 }
 
-void Building::rmRequire( int idRm) {
-    require_.erase(require_.begin() + idRm);
+void Building::rmRequirements( int idRm) {
+    auto it = requirements_.begin();
+    std::advance( it , idRm);
+    requirements_.erase(it);
 }
 
-bool Building::hasRequire() {
-    return require_.size();
+bool Building::hasRequirements() {
+    return requirements_.size();
 }
