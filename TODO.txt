@@ -5,5 +5,8 @@ status  nickname        task
 0       Vladislav       check constructors
 0       Vladislav       create class Game
 0       Vladislav       Player.h
-0       Mike            create structure 4 GUI part
+0       Mike            create structure for GUI part
 0       Mike            graphic of map
+0	Mike		screenshot on the background
+0	Mike		sounds of the game
+0	Mike		search pictures for maps and warriors
