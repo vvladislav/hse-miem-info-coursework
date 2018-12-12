@@ -10,7 +10,7 @@ DESTDIR = bin/
 mkswp.target = .tmp
 mkswp.commands = mkdir
 QT_EXTRA_TARGET += mktmp
-MOC_DIR = src/graphic
+MOC_DIR = .moc_dir
 unix{
 TARGET = strategy.out
 }

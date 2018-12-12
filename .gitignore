@@ -19,6 +19,9 @@
 
 #ignore qt files
 *.pro.user
+moc_*
+ui_*
+*.moc*
 
 #ignore qmake files
 *.stash
