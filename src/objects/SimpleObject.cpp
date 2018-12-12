@@ -11,8 +11,8 @@ SimpleObject::SimpleObject() {
 
 SimpleObject::SimpleObject(Place*** place, int placeWidth, int placeHight) {
     id_    = std::make_pair(-1,-1);
-    placeWidth_ = placeWidth_;
-    placeHight_ = placeHight_;
+    placeWidth_ = placeWidth;
+    placeHight_ = placeHight;
     place_      = new Place**[placeHight_];
     for ( int i = 0; i < placeHight_; ++i ) {
         place_[i] = new Place*[placeWidth_];
@@ -57,7 +57,7 @@ bool SimpleObject::operator== ( const SimpleObject& simpleObject) const {
     return (this->id_      == simpleObject.getId());
 }
 
-Place*** const SimpleObject::getPlaces() const {
+Place*** SimpleObject::getPlaces() const {
     return place_;
 }
 

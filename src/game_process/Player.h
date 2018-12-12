@@ -24,9 +24,9 @@ class Player {
         Player(int const id);
         bool operator== (const Player& player) const;
 
-        int const getId() const;
+        int getId() const;
         std::string const getName() const;
-        int const getColor() const;
+        int getColor() const;
         std::list<Unit> getUnits() const;
         std::list<Building> getBuildings() const;
         std::list<Place*> getVisiblePlaces() const; 
@@ -54,8 +54,8 @@ class Player {
         void addChoosedBuilding( Building* chooseBuilding );
         void changePlaces( Unit travelUnit);
         void changePlaces(std::list<Unit*> travelUnits );
-        void addResources(int idResources, int quality);
-        void spendResources(int idResources, int quality);
+        void addResources(unsigned int idResources, unsigned int quality);
+        void spendResources(unsigned int idResources, unsigned int quality);
 
 };
 

@@ -50,7 +50,7 @@ bool Player::operator== (const Player& player) const {
     return false;
 }
 
-int const Player::getId() const {
+int Player::getId() const {
     return id_;
 }
 
@@ -58,7 +58,7 @@ std::string const Player::getName() const {
     return name_;
 }
 
-int const Player::getColor() const {
+int Player::getColor() const {
     return color_;
 }
 
@@ -159,10 +159,10 @@ void Player::changePlaces(Unit travelUnit) {
     // create with time
 }
 
-void Player::addResources(int idResources, int quality) {
+void Player::addResources(unsigned int idResources, unsigned int quality) {
     resources_[idResources].second += quality;
 }
 
-void Player::spendResources(int idResources, int quality) {
+void Player::spendResources(unsigned int idResources, unsigned int quality) {
     resources_[idResources].first -= quality;
 }

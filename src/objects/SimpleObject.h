@@ -23,7 +23,7 @@ class SimpleObject
 
         // there are must be function with image
 
-        Place*** const getPlaces() const;
+        Place*** getPlaces() const;
         std::string const getName() const;
         std::pair<int,int> getId() const;
 

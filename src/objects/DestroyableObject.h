@@ -16,7 +16,7 @@ class DestroyableObject : virtual public SimpleObject
         DestroyableObject& operator- ( int rm );
         DestroyableObject& operator+ ( int add );
 
-        int const getHealth() const ;
+        int getHealth() const ;
 
         void setHealth( int health );
 

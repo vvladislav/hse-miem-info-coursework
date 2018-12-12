@@ -9,8 +9,8 @@
 #include <list>
 
 
-#ifdef _WIN32
-
+#ifdef  _WIN32 || _WIN64
+#include <libloaderapi.h>
 #endif
 
 #ifdef __unix__ 

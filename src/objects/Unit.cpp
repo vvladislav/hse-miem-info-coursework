@@ -1,11 +1,11 @@
 #include "All-include.h"
 #include "Unit.h"
 
-Unit::Unit():MovingObject(), AttackingObject(), DestroyableObject(), SimpleObject() {
+Unit::Unit():SimpleObject(), MovingObject(), DestroyableObject(), AttackingObject() {
     requirements_.clear();
 }
 
-Unit::Unit(const Unit& unit):MovingObject(unit), AttackingObject(unit), DestroyableObject(unit), SimpleObject() {
+Unit::Unit(const Unit& unit):SimpleObject(), MovingObject(unit),  DestroyableObject(unit), AttackingObject(unit) {
     this->requirements_ = unit.getRequirements();
 }
 

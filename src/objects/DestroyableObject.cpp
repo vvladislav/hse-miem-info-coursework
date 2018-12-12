@@ -29,7 +29,7 @@ DestroyableObject& DestroyableObject::operator+ ( int add ) {
     return *this;
 }
 
-int const DestroyableObject::getHealth() const {
+int DestroyableObject::getHealth() const {
     return health_;
 }
 

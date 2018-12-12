@@ -21,7 +21,7 @@ bool MovingObject::operator== ( const MovingObject& movingObject) const {
     return (this->id_  == movingObject.id_);
 }
 
-int const MovingObject::getSpeed() const {
+int MovingObject::getSpeed() const {
     return speed_;
 }
 
