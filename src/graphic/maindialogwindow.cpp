@@ -1,13 +1,13 @@
-#include "mainwindow.h"
-#include "ui_mainwindow.h"
+#include "maindialogwindow.h"
+#include "ui_maindialogwindow.h"
 #include "mainwindow.h"
 #include "gamewindow.h"
 #include <QMessageBox>
 #include <QPixmap>
 
-MainWindow::MainWindow(QWidget *parent) :
-    QMainWindow(parent),
-    ui(new Ui::MainWindow)
+mainDialogWindow::mainDialogWindow(QWidget *parent) :
+    QDialog(parent),
+    ui(new Ui::mainDialogWindow)
 {
     ui->setupUi(this);
     QPixmap pix(":/new/images/images/forMainWindow.jpg");
@@ -16,13 +16,12 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->label->setPixmap(pix.scaled(width,height,Qt::KeepAspectRatio));
 }
 
-
-MainWindow::~MainWindow()
+mainDialogWindow::~mainDialogWindow()
 {
     delete ui;
 }
 
-void MainWindow::on_startGameButton_clicked()
+void mainDialogWindow::on_startGameButton_clicked()
 {
     gameWindow gameWin;
     gameWin.setModal(true);
@@ -30,7 +29,7 @@ void MainWindow::on_startGameButton_clicked()
     gameWin.exec();
 }
 
-void MainWindow::on_quitButton_clicked()
+void mainDialogWindow::on_quitButton_clicked()
 {
-    close();
+        close();
 }
