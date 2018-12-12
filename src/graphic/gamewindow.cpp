@@ -32,8 +32,10 @@ gameWindow::gameWindow(QWidget *parent) :
 
 void gameWindow::showMenu()
 {
-    dialogInsideGame* dialog = new dialogInsideGame;
-    dialog->exec();
+    dialogInsideGame dialog;
+    dialog.setModal(true);
+    hide();
+    dialog.exec();
 }
 
 gameWindow::~gameWindow()

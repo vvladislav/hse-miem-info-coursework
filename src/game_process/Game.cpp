@@ -128,17 +128,7 @@ void Game::makeTurn() {
 //
 //}
 
-bool Game::save( std::string saveFileName ) {
-//  #ifdef __unix__
-//      char result[256];
-//      ssize_t count = readlink("/proc/self/exe", result, 256);
-//      std::string path;
-//      path = std::string(result , (count > 0) ? count : 0);
-//      for (int i = path.size() - 1 ; path[i] != '/' ; --i) 
-//          path.pop_back();
-//      path += "../common/save/";
-//  #endif
-//      path += saveFileName;
+bool Game::save( std::string path ) {
 //      path += ".save";
 //      std::ofstream fout; 
 //      fout.open(path, std::ios_base::out);
@@ -363,7 +353,7 @@ bool Game::save( std::string saveFileName ) {
     return true;
 }
 
-bool Game::load( std::string loadFileName ) {
+bool Game::load( std::string path ) {
     // code
     return true;
 }

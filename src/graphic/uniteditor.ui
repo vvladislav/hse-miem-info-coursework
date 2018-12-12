@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>unitEditor</class>
+ <widget class="QDialog" name="unitEditor">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>923</width>
+    <height>651</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Dialog</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QLabel" name="speedLabel">
+     <property name="text">
+      <string>Speed</string>
+     </property>
+    </widget>
+   </item>
+   <item row="0" column="2" rowspan="6">
+    <widget class="QLabel" name="imageLabel">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QSpinBox" name="speedSpinBox"/>
+   </item>
+   <item row="1" column="1">
+    <widget class="QPushButton" name="imageButton">
+     <property name="text">
+      <string>Image</string>
+     </property>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QLabel" name="healthLabel">
+     <property name="text">
+      <string>Health</string>
+     </property>
+    </widget>
+   </item>
+   <item row="3" column="0">
+    <widget class="QSpinBox" name="healthSpinBox"/>
+   </item>
+   <item row="3" column="1">
+    <widget class="QPushButton" name="soundButton_7">
+     <property name="text">
+      <string>Sound</string>
+     </property>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QLabel" name="attackLabel">
+     <property name="text">
+      <string>Attack</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0">
+    <widget class="QSpinBox" name="attackSpinBox"/>
+   </item>
+   <item row="6" column="0">
+    <widget class="QLabel" name="sizeLabel">
+     <property name="text">
+      <string>Size</string>
+     </property>
+    </widget>
+   </item>
+   <item row="7" column="0">
+    <widget class="QSpinBox" name="sizeSpinBox"/>
+   </item>
+   <item row="8" column="0" rowspan="2">
+    <widget class="QPushButton" name="rangeButton">
+     <property name="text">
+      <string>Range</string>
+     </property>
+    </widget>
+   </item>
+   <item row="8" column="2">
+    <widget class="QPushButton" name="addObjButton">
+     <property name="text">
+      <string>Add Object</string>
+     </property>
+    </widget>
+   </item>
+   <item row="9" column="2">
+    <widget class="QPushButton" name="backButton">
+     <property name="text">
+      <string>Back</string>
+     </property>
+    </widget>
+   </item>
+   <item row="10" column="0">
+    <widget class="QPushButton" name="dependencesButton">
+     <property name="text">
+      <string>Add dependences</string>
+     </property>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

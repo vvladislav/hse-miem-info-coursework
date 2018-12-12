@@ -42,8 +42,8 @@ class Game {
 
 //        bool readUnits(/**/);
 
-        bool save( std::string saveFileName );
-        bool load( std::string loadFileName );
+        bool save( std::string path );
+        bool load( std::string path );
 
         bool isLoose();
         bool endGame();

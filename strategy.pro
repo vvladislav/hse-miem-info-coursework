@@ -47,11 +47,17 @@ HEADERS += src/All-include.h \
            src/objects/SimpleObject.h \
            src/objects/Terrain.h \
            src/objects/Unit.h \
-    src/graphic/maindialogwindow.h
+    src/graphic/maindialogwindow.h \
+    src/graphic/editor.h \
+    src/graphic/uniteditor.h \
+    src/graphic/buildingeditor.h
 FORMS += src/graphic/dialoginsidegame.ui \
          src/graphic/gamewindow.ui \
          src/graphic/mainwindow.ui \
-    src/graphic/maindialogwindow.ui
+    src/graphic/maindialogwindow.ui \
+    src/graphic/editor.ui \
+    src/graphic/uniteditor.ui \
+    src/graphic/buildingeditor.ui
 SOURCES += src/main.cpp \
            src/game_process/Game.cpp \
            src/game_process/Map.cpp \
@@ -68,5 +74,8 @@ SOURCES += src/main.cpp \
            src/objects/SimpleObject.cpp \
            src/objects/Terrain.cpp \
            src/objects/Unit.cpp \
-    src/graphic/maindialogwindow.cpp
+    src/graphic/maindialogwindow.cpp \
+    src/graphic/editor.cpp \
+    src/graphic/uniteditor.cpp \
+    src/graphic/buildingeditor.cpp
 RESOURCES += resources.qrc
