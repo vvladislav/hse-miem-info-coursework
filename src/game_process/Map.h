@@ -2,6 +2,7 @@
 #define MAP_H
 
 #include "All-include.h"
+#include "Place.h"
 
 class Map
 {
@@ -9,17 +10,19 @@ class Map
         std::vector<std::vector<Place>> places_;
     public:
         Map();
-        Map( int mapSize);
+        Map( int sizeX, int sizeY);
         Map(const Map& map);
         Map(std::vector<std::vector<Place>> places);
-        Map operator= (const Map& map);
+        Map& operator= (const Map& map);
+        const std::vector<Place> operator[] ( const int x) const;
 
         void setPlace( Place place);
         void setPlace( Place place, int x, int y);
         void setPlaces( std::vector<std::vector<Place>> places );
 
-        Place const getPlace(int x, int y) const;
+        Place getPlace(int x, int y) const;
         std::vector<std::vector<Place>> const getPlaces() const;
+        int getSize() const;
 
 };
 

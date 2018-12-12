@@ -9,15 +9,14 @@
 #include <QToolBar>
 #include <QMenuBar>
 #include <QAction>
+#include <QShortcut>
 
 gameWindow::gameWindow(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::gameWindow)
 {
+    new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(showMenu()));
     ui->setupUi(this);
-    dialogInsideGame dialInsGame;
-    QAction *open = new QAction(tr("Open"),this);
-    open->setShortcut(QKeySequence(Qt::Key_Escape));
     //connect(open,SIGNAL(triggered()),this,Qt::AutoConnection);
     //connect(exit,SIGNAL(triggered()),this,SLOT(close()));
     /*QAction *exit = new QAction(tr("Exit"),this);
@@ -29,6 +28,12 @@ gameWindow::gameWindow(QWidget *parent) :
     file->addAction(exit);
     connect(new_game,SIGNAL(triggered()),this,SLOT(new_game()));
     connect(exit,SIGNAL(triggered()),this,SLOT(close()));*/
+}
+
+void gameWindow::showMenu()
+{
+    dialogInsideGame* dialog = new dialogInsideGame;
+    dialog->exec();
 }
 
 gameWindow::~gameWindow()

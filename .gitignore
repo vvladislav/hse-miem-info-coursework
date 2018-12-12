@@ -1,0 +1,27 @@
+# Ignore debug tex files
+*.aux
+*.bbl
+*.blg
+*.log
+*.synctex
+*.toc
+
+# Ignore tmp files
+*.tmp
+
+# Ignore binary files
+*.out
+*.o
+*.exe
+
+# Ignore vim files
+*.vimrc
+
+#ignore qt files
+*.pro.user
+
+#ignore qmake files
+*.stash
+
+# Ignore Makefile
+Makefile

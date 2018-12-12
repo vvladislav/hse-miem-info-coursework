@@ -2,66 +2,65 @@
 #include "Place.h"
 
 Place::Place() {
-    coors_ = (0,0);
-    attack_.resize(0);
+    coors_ = std::make_pair(0,0);
+    attackedBy_.resize(0);
 }
 
 Place::Place(const Place& place) {
     this->coors_ = place.getCoors();
-    this->attack_ = place.getAttack();
+    this->attackedBy_ = place.getAttackedBy();
 }
 
-Place& Place::operator = (const Place& place) {
+Place& Place::operator = ( const Place& place) {
     this->coors_ = place.getCoors();
-    this->attack_ = place.getAttack();
+    this->attackedBy_ = place.getAttackedBy();
+    return *this;
 }
 
 Place::Place( int x, int y ) {
-    coors_ = (x,y);
-    attack_.resize(0);
+    coors_ = std::make_pair(x,y);
+    attackedBy_.clear();
 }
 
 Place::Place( std::pair<int,int> coors) {
     coors_ = coors;
-    attack_.resize(0);
+    attackedBy_.clear();
 }
 
 Place::Place( int x, int y, Terrain ter ) {
-    coors_ = (x,y);
-    attack_.resize(0);
+    coors_ = std::make_pair(x,y);
+    attackedBy_.clear();
     ter_ = ter;
 }
 
-std::pair< int , int > const getCoors() const {
+std::pair< int , int > const Place::getCoors() const {
     return coors_;
 }
 
-std::vector<attackObject*> getAttackObjects() const {
-    return attack_;
+std::list<AttackingObject*> Place::getAttackedBy() const {
+    return attackedBy_;
 }
 
-terrain getTerrain() const {
+const Terrain& Place::getTerrain() const {
     return ter_;
 }
 
-void setAttack(std::vector<attackObject*> object) {
-    attack_ = object;
+const SimpleObject* Place::getObject() const {
+    return object_;
 }
 
-void setAttack( attackObject object) {
-    attack_.push_back(&object);
+void Place::setAttackedBy(std::list<AttackingObject*> object) {
+    attackedBy_ = object;
 }
 
-void setTerrain( &terrain ter) {
+void Place::setAttackedBy( AttackingObject &object) {
+    attackedBy_.push_back(&object);
+}
+
+void Place::setTerrain( Terrain& ter) {
     ter_ = ter;
 }
 
-void addObject(Object newObject) {
-    stand_ =  newObject;
-}
-
-void removeObject() {
-    stand_ = nullptr;
-}
-
+void Place::setObject(SimpleObject* newObject) {
+    object_ =  newObject;
 }

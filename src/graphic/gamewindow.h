@@ -15,6 +15,10 @@ public:
     explicit gameWindow(QWidget *parent = nullptr);
     ~gameWindow();
 
+private slots:
+
+    void showMenu();
+
 private:
     Ui::gameWindow *ui;
 };

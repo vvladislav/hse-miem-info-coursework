@@ -2,33 +2,32 @@
 #define PLACE_H
 
 #include "All-include.h"
+#include "Terrain.h"
 
 class Place
 {
     private:
-        std::pair<int,int> const coors_;
-        Object* stand_ = nullptr;
-        std::vector<attackObject*> attack_;
+        std::pair<int,int> coors_;
+        SimpleObject* object_ = nullptr;
+        std::list<AttackingObject*> attackedBy_; // think about it;
         Terrain ter_;
-        
     public:
         Place();
-        Place& operator= (const PLace& place);
-        Place( Place& place );
+        Place& operator= ( const Place& place);
+        Place( const Place& place );
         Place( int x, int y);
         Place( std::pair<int,int> coors);
         Place( int x, int y , Terrain ter);
         
         std::pair< int , int > const getCoors() const;
-        std::vector<attackObject*> getAttackObjects() const;
-        terrain getTerrain() const;
+        std::list<AttackingObject*> getAttackedBy() const;
+        const Terrain& getTerrain() const;
+        const SimpleObject* getObject() const;
 
-        void setAttack(std::vector<attackObject*> object);
-        void setAttack(attackObject object);
-        void setTerrain( &Terrain ter);
-
-        void addObject(Object newObject);
-        void removeObject();
+        void setAttackedBy(std::list<AttackingObject*> object);
+        void setAttackedBy(AttackingObject &object);
+        void setTerrain( Terrain& ter);
+        void setObject(SimpleObject* newObject);
 
 };
 

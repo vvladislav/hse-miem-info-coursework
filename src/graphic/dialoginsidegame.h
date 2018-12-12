@@ -18,8 +18,6 @@ public:
 private slots:
     void on_backToGame_clicked();
 
-    void on_pushButton_3_clicked();
-
     void on_backToMenu_clicked();
 
     void on_settingsButton_clicked();

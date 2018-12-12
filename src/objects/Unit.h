@@ -1,20 +1,31 @@
-#ifndef MOVEING_OBJECT_H
-#define MOVEING_OBJECT_H
+#ifndef UNIT_H
+#define UNIT_H
 
 #include "All-include.h"
+#include "MovingObject.h"
+#include "DestroyableObject.h"
+#include "AttackingObject.h"
 
-class Unit : MovingObject, DestroyingObject
+class Unit : public MovingObject,
+             public DestroyableObject,
+             public AttackingObject
 {
     private:
-        Weapon weapon;
-        // add id
-    protected:
-        int speed;
+        std::list < Building* > requirements_;
     public:
-        Unit:: MovingObject(){};
-        Unit(std::pair<int,int> place):: MovingObject(std::pair<int,int> place){};
+        Unit();
+        Unit(const Unit& unit);
+        Unit& operator= ( const Unit& unit);
+        bool operator== (const Unit& unit) const;
 
+        std::list < Building* > const getRequirements() const;
+
+        void setRequirements(std::list< Building* > requirements);
+
+        void addRequirements( Building* add);
+        void rmRequirements( int idRm );
+        bool hasRequirements();
 
 };
 
-#endif // MOVEING_OBJECT_H
+#endif // UNIT_H

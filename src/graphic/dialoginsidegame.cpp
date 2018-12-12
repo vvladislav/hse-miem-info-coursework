@@ -7,11 +7,13 @@
 #include <QToolBar>
 #include <QMenuBar>
 #include <QAction>
+#include <QShortcut>
 
 dialogInsideGame::dialogInsideGame(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::dialogInsideGame)
 {
+    new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(showMenu()));
     ui->setupUi(this);
 }
 
