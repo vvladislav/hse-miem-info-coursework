@@ -2,6 +2,7 @@
 #include "ui_dialoginsidegame.h"
 #include "mainwindow.h"
 #include "gamewindow.h"
+#include "maindialogwindow.h"
 #include <QMessageBox>
 #include <QDebug>
 #include <QToolBar>
@@ -30,15 +31,31 @@ void dialogInsideGame::on_backToGame_clicked()
 void dialogInsideGame::on_backToMenu_clicked()
 {
     gameWindow gameWin;
+    mainDialogWindow mainDialog;
+    dialogInsideGame dialogInside;
     QMessageBox::StandardButton proof = QMessageBox::question(this, "Information", "Are you sure? Information about session will be lost", QMessageBox::Yes | QMessageBox::No);
     if (proof == QMessageBox::Yes)
     {
-        gameWin.close();
+        closeDialogInside();
+        closeGameWindow();
+        mainDialog.exec();
     }
     else
     {
-        hide();
+        dialogInside.hide();
     }
+}
+
+void dialogInsideGame::closeDialogInside()
+{
+    dialogInsideGame dialogInside;
+    dialogInside.close();
+}
+
+void dialogInsideGame::closeGameWindow()
+{
+    gameWindow gameWin;
+    gameWin.close();
 }
 
 void dialogInsideGame::on_settingsButton_clicked()

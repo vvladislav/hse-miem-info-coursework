@@ -10,6 +10,11 @@
 #include <QMenuBar>
 #include <QAction>
 #include <QShortcut>
+#include <vector>
+#include <QLayout>
+#include <QGridLayout>
+#include <QLabel>
+#include <QPixmap>
 
 gameWindow::gameWindow(QWidget *parent) :
     QDialog(parent),
@@ -17,23 +22,35 @@ gameWindow::gameWindow(QWidget *parent) :
 {
     new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(showMenu()));
     ui->setupUi(this);
-    //connect(open,SIGNAL(triggered()),this,Qt::AutoConnection);
-    //connect(exit,SIGNAL(triggered()),this,SLOT(close()));
-    /*QAction *exit = new QAction(tr("Exit"),this);
-    QAction *Back_to_menu = new QAction(tr("Back to menu"),this);
-    QAction *new_game = new QAction(tr("New Game"),this);
-    exit->setShortcut(tr("Ctrl+F"));
-    file->addAction(new_game);
-    file->addAction(Back_to_menu);
-    file->addAction(exit);
-    connect(new_game,SIGNAL(triggered()),this,SLOT(new_game()));
-    connect(exit,SIGNAL(triggered()),this,SLOT(close()));*/
+    int n = 8;
+    int m = 8;
+    for ( int i = 0; i < n; ++i ) {
+            for ( int j = 0; j < m; ++j ) {
+            QLabel* but = new QLabel;
+            but->setText(".!.");
+            ui->gridLayout->addWidget(but,i,j);
+            }
+    }
 }
 
 void gameWindow::showMenu()
 {
     dialogInsideGame* dialog = new dialogInsideGame;
     dialog->exec();
+}
+
+void gameWindow::showMatrix()
+{/*
+    int n = 69;
+    int m = 69;
+    gameWindow* action = new gameWindow;
+    for(int i = 0; i < n; ++i)
+    {
+        for(int j = 0; j < m; ++j)
+        {
+            QPushButton* but = new QPushButton;
+        }
+    }*/
 }
 
 gameWindow::~gameWindow()

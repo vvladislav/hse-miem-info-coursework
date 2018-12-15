@@ -2,12 +2,12 @@
 #define TERRAIN_H
 
 #include "All-include.h"
+#include "QPixmap"
 
 class Terrain {
     private:
         int speedMultiplier_ = 1;
         int permeability_ = 1;
-        // image
     public:
         Terrain();
         Terrain& operator= (const Terrain& ter);

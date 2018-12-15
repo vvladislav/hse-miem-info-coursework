@@ -41,7 +41,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Вернуться</string>
+    <string>Back to game</string>
    </property>
   </widget>
   <widget class="QPushButton" name="settingsButton">
@@ -60,7 +60,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Настройки</string>
+    <string>Settings</string>
    </property>
   </widget>
   <widget class="QPushButton" name="backToMenu">
@@ -79,7 +79,7 @@
     </font>
    </property>
    <property name="text">
-    <string>Выйти в меню</string>
+    <string>Quit to menu</string>
    </property>
   </widget>
  </widget>

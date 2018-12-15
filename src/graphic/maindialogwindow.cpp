@@ -2,6 +2,7 @@
 #include "ui_maindialogwindow.h"
 #include "mainwindow.h"
 #include "gamewindow.h"
+#include "settingswindow.h"
 #include <QMessageBox>
 #include <QPixmap>
 
@@ -31,5 +32,16 @@ void mainDialogWindow::on_startGameButton_clicked()
 
 void mainDialogWindow::on_quitButton_clicked()
 {
-        close();
+    close();
+}
+
+void mainDialogWindow::on_checkScores_clicked()
+{
+
+}
+
+void mainDialogWindow::on_settingsButtom_clicked()
+{
+    settingsWindow setWind;
+    setWind.show();
 }

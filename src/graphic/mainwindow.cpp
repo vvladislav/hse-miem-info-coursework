@@ -10,10 +10,10 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    QPixmap pix(":/new/images/images/forMainWindow.jpg");
-    int width = ui->label->width();
-    int height = ui->label->height();
-    ui->label->setPixmap(pix.scaled(width,height,Qt::KeepAspectRatio));
+    //QPixmap pix(":/new/images/images/forMainWindow.jpg");
+    //int width = ui->label->width();
+    //int height = ui->label->height();
+    //ui->label->setPixmap(pix.scaled(width,height,Qt::KeepAspectRatio));
 }
 
 
@@ -21,7 +21,7 @@ MainWindow::~MainWindow()
 {
     delete ui;
 }
-
+/*
 void MainWindow::on_startGameButton_clicked()
 {
     gameWindow gameWin;
@@ -34,3 +34,4 @@ void MainWindow::on_quitButton_clicked()
 {
     close();
 }
+*/

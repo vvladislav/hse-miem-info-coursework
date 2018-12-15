@@ -10,15 +10,14 @@ class mainDialogWindow;
 class mainDialogWindow : public QDialog
 {
     Q_OBJECT
-
 public:
     explicit mainDialogWindow(QWidget *parent = nullptr);
     ~mainDialogWindow();
-
 private slots:
     void on_startGameButton_clicked();
-
     void on_quitButton_clicked();
+    void on_checkScores_clicked();
+    void on_settingsButtom_clicked();
 
 private:
     Ui::mainDialogWindow *ui;
