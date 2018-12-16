@@ -1,5 +1,7 @@
 <RCC>
-    <qresource prefix="/new/images">
-        <file>images/forMainWindow.jpg</file>
+    <qresource prefix="/."/>
+    <qresource prefix="/">
+        <file>common/images/column.jpg</file>
+        <file>common/images/forMainWindow.jpg</file>
     </qresource>
 </RCC>

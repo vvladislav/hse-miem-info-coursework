@@ -1,30 +1,60 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "mainwindow.h"
-#include "gamewindow.h"
 #include <QMessageBox>
 #include <QPixmap>
 #include "Game.h"
 #include <QFileDialog>
-#include "editor.h"
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    escButton_ = new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(showMenu()));
     ui->setupUi(this);
-    QPixmap pix(":/new/images/images/forMainWindow.jpg");
+    QPixmap pix(":/common/images/forMainWindow.jpg");
     int width = ui->label->width();
     int height = ui->label->height();
     ui->label->setPixmap(pix.scaled(width,height,Qt::KeepAspectRatio));
-}
-
-void MainWindow::setGame( Game* game ) {
-    game_ = game;
-}
-
-const Game* MainWindow::getGame() {
-    return game_;
+    ui->stackedWidget->setCurrentIndex(mainMenu);
+    QObject::connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), ui->lcdNumber, SLOT(display(int)));
+    ui->radioButton1024->setChecked(true);
+    ui->radioButton_2->setChecked(false);
+    for ( int i = 0; i < gameMatrixY_; ++i ) {
+        std::vector<QLabel*> vec;
+            for ( int j = 0; j < gameMatrixX_; ++j ) {
+            QLabel* label = new QLabel;
+            label->setText(".!.");
+            ui->gameVision->addWidget(label,i,j);
+            vec.push_back(label);
+            }
+        gameMatrix_.push_back(vec);
+    }
+    for ( int i = 0; i < 4; ++i ) {
+        std::vector<QLabel*> vec;
+            for ( int j = 0; j < 8; ++j ) {
+            QLabel* label = new QLabel;
+            ui->choosedLayout->addWidget(label,i,j);
+            vec.push_back(label);
+            }
+        choosedMatrix_.push_back(vec);
+    }
+    // button up and down
+    // late
+    for ( int i = 0; i < 3; ++i ) {
+        std::vector<QLabel*> vec;
+            for ( int j = 0; j < 8; ++j ) {
+            QLabel* label = new QLabel;
+            ui->trainLayout->addWidget(label,i,j);
+            vec.push_back(label);
+            }
+        trainMatrix_.push_back(vec);
+    }
+    // button up and down
+    // late
+    QPixmap pixColumn(":/common/images/column.jpg");
+    ui->border->setPixmap(pixColumn.scaledToWidth(ui->border->width()));
+    ui->border_2->setPixmap(pixColumn.scaledToWidth(ui->border_2->width()));
 }
 
 MainWindow::~MainWindow()
@@ -32,12 +62,23 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+void MainWindow::showMenu()
+{
+    if (ui->stackedWidget->currentIndex() == gameGui) {
+        ui->stackedWidget->setCurrentIndex(gameMenu);
+    }
+    else {
+        QMessageBox::StandardButton proof = QMessageBox::question(this, "Information", "Are you sure? Information about session will be lost", QMessageBox::Yes | QMessageBox::No);
+        if (proof == QMessageBox::Yes)
+        {
+            close();
+        }
+    }
+}
+
 void MainWindow::on_startGameButton_clicked()
 {
-    gameWindow gameWin;
-    gameWin.setModal(true);
-    hide();
-    gameWin.exec();
+    ui->stackedWidget->setCurrentIndex(gameGui);
 }
 
 void MainWindow::on_quitButton_clicked()
@@ -81,7 +122,63 @@ void MainWindow::on_saveButton_clicked()
 
 void MainWindow::on_editorButton_clicked()
 {
-    Editor editor;
-    editor.setModal(true);
-    editor.exec();
+    ui->stackedWidget->setCurrentIndex(editorMenu);
+}
+
+void MainWindow::on_backToMenu_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(mainMenu);
+}
+
+void MainWindow::on_backToGame_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(gameGui);
+}
+
+void MainWindow::on_editorUnitsButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(editorUnitMenu);
+}
+
+void MainWindow::on_editorBuildingsButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(editorBuildingMenu);
+}
+
+void MainWindow::on_editorBackButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(mainMenu);
+}
+void MainWindow::on_backButton_clicked()
+{
+    ui->stackedWidget->setCurrentIndex(editorMenu);
+}
+
+void MainWindow::on_backButton_2_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(editorMenu);
+}
+
+void MainWindow::on_settingsMainButton_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(settingsMenu);
+}
+
+void MainWindow::on_settingsDialogButton_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(settingsMenu);
+}
+
+void MainWindow::on_closeWindow_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(mainMenu);
+}
+
+void MainWindow::on_recordsButton_clicked()
+{
+}
+
+void MainWindow::on_editorMapsButton_clicked()
+{
+     ui->stackedWidget->setCurrentIndex(editorMapMenu);
 }

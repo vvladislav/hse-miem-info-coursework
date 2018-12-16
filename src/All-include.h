@@ -35,8 +35,20 @@ class ResourceObject;
 
 enum resources {
     gold = 0,
-    stone = 0
+    stone = 1
 
+};
+
+enum mainwindow {
+    mainMenu=0,
+    gameGui=1,
+    gameMenu=2,
+    editorMenu=3,
+    editorUnitMenu=4,
+    editorBuildingMenu=5,
+    settingsMenu=6,
+    editorMapMenu=7,
+    chooseCardMenu=8
 };
 
 #endif // ALL_INCLUDE_H

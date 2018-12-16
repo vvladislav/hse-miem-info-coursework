@@ -36,8 +36,6 @@ HEADERS += src/All-include.h \
            src/game_process/Map.h \
            src/game_process/Place.h \
            src/game_process/Player.h \
-           src/graphic/dialoginsidegame.h \
-           src/graphic/gamewindow.h \
            src/graphic/mainwindow.h \
            src/objects/AttackingObject.h \
            src/objects/Building.h \
@@ -46,25 +44,13 @@ HEADERS += src/All-include.h \
            src/objects/ResourceObject.h \
            src/objects/SimpleObject.h \
            src/objects/Terrain.h \
-           src/objects/Unit.h \
-    src/graphic/maindialogwindow.h \
-    src/graphic/editor.h \
-    src/graphic/uniteditor.h \
-    src/graphic/buildingeditor.h
-FORMS += src/graphic/dialoginsidegame.ui \
-         src/graphic/gamewindow.ui \
-         src/graphic/mainwindow.ui \
-    src/graphic/maindialogwindow.ui \
-    src/graphic/editor.ui \
-    src/graphic/uniteditor.ui \
-    src/graphic/buildingeditor.ui
+           src/objects/Unit.h 
+FORMS +=   src/graphic/mainwindow.ui
 SOURCES += src/main.cpp \
            src/game_process/Game.cpp \
            src/game_process/Map.cpp \
            src/game_process/Place.cpp \
            src/game_process/Player.cpp \
-           src/graphic/dialoginsidegame.cpp \
-           src/graphic/gamewindow.cpp \
            src/graphic/mainwindow.cpp \
            src/objects/AttackingObject.cpp \
            src/objects/Building.cpp \
@@ -73,9 +59,5 @@ SOURCES += src/main.cpp \
            src/objects/ResourceObject.cpp \
            src/objects/SimpleObject.cpp \
            src/objects/Terrain.cpp \
-           src/objects/Unit.cpp \
-    src/graphic/maindialogwindow.cpp \
-    src/graphic/editor.cpp \
-    src/graphic/uniteditor.cpp \
-    src/graphic/buildingeditor.cpp
+           src/objects/Unit.cpp
 RESOURCES += resources.qrc

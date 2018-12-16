@@ -22,6 +22,7 @@
 moc_*
 ui_*
 *.moc*
+*.autosave
 
 #ignore qmake files
 *.stash
