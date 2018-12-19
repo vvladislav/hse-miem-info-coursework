@@ -30,10 +30,18 @@ int AttackingObject::getRange() const {
     return range_;
 }
 
-void AttackingObject::setDamage( int const damage ) {
+Place* getTarget() const {
+    return target_;
+}
+
+void AttackingObject::setDamage( int damage ) {
     damage_ = damage;
 }
 
-void AttackingObject::setRange( int const range ) {
+void AttackingObject::setRange( int range ) {
     range_ = range;
+}
+
+void setTarget( Place* target ) {
+    target_ = target;
 }

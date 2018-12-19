@@ -32,6 +32,10 @@ std::vector<std::string> Game::getResourcePrototype() {
     return resourcePrototype_;
 }
 
+bool Game::getActive() {
+    return isActive_;
+}
+
 void Game::setPlayers(std::vector<Player> players ) {
     players_ = players;
 }
@@ -46,6 +50,10 @@ void Game::setBuildingPrototype(std::vector <Building> buildingPrototype ) {
 
 void Game::setResourcePrototype(std::vector <std::string> resourcePrototype ) {
     resourcePrototype_ = resourcePrototype;
+}
+
+void Game::setActive( bool activities ) {
+    isActive_ = activities;
 }
 
 void Game::addPlayers( Player add ) {
@@ -105,28 +113,146 @@ void Game::rmResourcePrototype( std::string rm ) {
 }
 
 void Game::makeTurn() {
-
-// code
-
+    for ( auto i : players_ ) {
+        if ( i.getStatus() ) {
+            std::list<Unit> & units = i.getUnits();
+            for ( auto i : units ) {
+                if ( i.isMove() ) {
+                    i.setPlace(i.path_.front(),map_);
+                    i.path_.pop_front();
+                }
+                if ( i.getTarget() != nullptr ) {
+                    if ( i.getTarget()->getObject().second == unitType ) {
+                        auto target = 
+                            players_[i.getTarget()
+                            ->getObject().first.first].getUnits()
+                            .begin();
+                        int k = i.getTarget()->getObject().first.second;
+                        for ( ; k > 0; --k ) {
+                        target++;
+                        }
+                        *target - i.getDamage();
+                        if ( (*target).getHealth() <= 0 ) {
+                            players_[(*target).getId().first]
+                                .remove((*target));
+                        }
+                    } else
+                    if ( i.getTarget()->getObject().second == buildingType ) {
+                        auto target = 
+                            players_[i.getTarget()
+                            ->getObject().first.first].getBuildings()
+                            .begin();
+                        int k = i.getTarget()->getObject().first.second;
+                        for ( ; k > 0; --k ) {
+                        target++;
+                        }
+                        (*target) - i.getDamage();
+                        if ( (*target).getHealth() <= 0 ) {
+                            players_[(*target).getId().first]
+                                .remove((*target));
+                        }
+                    }
+                }
+            }
+            std::list<Building> & buildings = i.getBuildings();
+            for ( auto i : buildings ) {
+                if ( i.getTarget() != nullptr ) {
+                    if ( i.getTarget()->getObject().second == unitType ) {
+                        auto target = 
+                            players_[i.getTarget()
+                            ->getObject().first.first].getUnits()
+                            .begin();
+                        int k = i.getTarget()->getObject().first.second;
+                        for ( ; k > 0; --k ) {
+                        target++;
+                        }
+                        *target - i.getDamage();
+                        if ( (*target).getHealth() <= 0 ) {
+                            players_[(*target).getId().first]
+                                .remove((*target));
+                        }
+                    } else
+                    if ( i.getTarget()->getObject().second == buildingType ) {
+                        auto target = 
+                            players_[i.getTarget()
+                            ->getObject().first.first].getBuildings()
+                            .begin();
+                        int k = i.getTarget()->getObject().first.second;
+                        for ( ; k > 0; --k ) {
+                        target++;
+                        }
+                        (*target) - i.getDamage();
+                        if ( (*target).getHealth() <= 0 ) {
+                            players_[(*target).getId().first]
+                                .remove((*target));
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
 
-// bool readObjects() {
-//#ifdef __unix__
-//    char result[256];
-//    ssize_t count = readlink("/proc/self/exe", result, 256);
-//    std::string path;
-//    path = std::string(result , (count > 0) ? count : 0);
-//    for (int i = path.size() - 1 ; path[i] != '/' ; --i) 
-//        path.pop_back();
-//    path += "../common/datebase/Units.txt";
-//#endif
-//    std::ofstream fin; 
-//    fout.open(path, std::ios_base::in);
-//    if (!(fin.is_open()))
-//        return false;
-//    
-//
-//}
+bool Game::readObjects() {
+    std::string path = givePath();
+    path += "../common/datebase/Units.txt";
+    std::ofstream fin; 
+    fin.open(path, std::ios_base::in);
+    if (!(fin.is_open()))
+        return false;
+    int number;
+//    fin >> number;
+    for ( int i = 0; i < number; ++i ) { 
+        Unit unit;
+//        fin >> unit;
+        addUnitPrototype(unit);
+    }
+    fin.close();
+    path = givePath();
+    path += "../common/datebase/Buildings.txt";
+    std::ofstream fin1; 
+    fin1.open(path, std::ios_base::in);
+    if (!(fin1.is_open()))
+        return false;
+//    fin1 >> number;
+    for ( int i = 0; i < number; ++i ) { 
+        Building building;
+//        fin1 >> unit;
+        addBuildingPrototype(building);
+    }
+    fin1.close();
+    return true;
+}
+
+bool Game::writeObjects() {
+    std::string path = givePath();
+    path += "../common/datebase/Units.txt";
+    std::ofstream fout; 
+    fout.open(path, std::ios_base::out);
+    if (!(fout.is_open()))
+        return false;
+    fout << unitPrototype_.size() << std::endl;;
+    for ( int i = 0; i < unitPrototype_.size(); ++i ) { 
+        Unit unit;
+//        fout << unit;
+        addUnitPrototype(unit);
+    }
+    fout.close();
+    path = givePath();
+    path += "../common/datebase/Buildings.txt";
+    std::ofstream fout1; 
+    fout1.open(path, std::ios_base::out);
+    if (!(fout1.is_open()))
+        return false;
+    fout1 << buildingPrototype_.size() << std::endl;
+    for ( int i = 0; i < buildingPrototype_.size(); ++i ) { 
+        Building building;
+//        fout1 << unit;
+        addBuildingPrototype(building);
+    }
+    fout1.close();
+    return true;
+}
 
 bool Game::save( std::string path ) {
 //      path += ".save";

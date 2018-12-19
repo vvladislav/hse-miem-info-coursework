@@ -84,3 +84,49 @@ void Building::rmRequirements( int idRm) {
 bool Building::hasRequirements() {
     return requirements_.size();
 }
+
+std::ostream& operator << (std::ostream &s, Building& building) {
+        if ( building.getPlaces() ) {
+            fout << building.getPlaces()->getCoors()[0].first << ' '
+                 << building.getPlaces()->getCoors()[0].second
+                 << std::endl;
+        }
+        else {
+            fout << -1
+                 << -1
+                 << std::endl;
+        }
+        fout << building.SimpleObject::getName()
+             << std::endl;
+        fout << building.AttackingObject::getDamage() << ' '
+             << building.AttackingObject::getRange()
+             << std::endl;
+        fout << building.AttackingObject::getTarget->getCoors->first << ' '
+             << building.AttackingObject::getTarget->getCoors->second
+             << std::endl;
+        fout << building.DestroyableObject::getHealth()
+             << std::endl;
+        fout << building.getId().first.first << ' '
+             << building.getId().first.second << ' '
+             << building.getId().second
+             << std::endl;
+        fout << building.getTrainables().size()
+             << std::endl;
+        for ( auto j : building.getTrainables() ) {
+            fout << j->getId().second
+                 << std::endl;
+        }
+        fout << building.getRequirements().size()
+             << std::endl;
+        for ( auto j : building.getRequirements() ) {
+            fout << j->getId().second
+                 << std::endl;
+        }
+    }
+    return s;
+}
+
+std::istream& operator >> (std::istream &s, Building& building) {
+
+    return s;
+}

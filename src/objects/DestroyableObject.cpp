@@ -43,8 +43,6 @@ void DestroyableObject::addHealth( int add ) {
 
 void DestroyableObject::rmHealth( int rm ) {
     health_ -= rm;
-    if ( health_ <= 0 )
-        this->~DestroyableObject();
 }
 
 DestroyableObject::~DestroyableObject() {

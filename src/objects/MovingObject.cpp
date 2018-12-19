@@ -29,10 +29,6 @@ const std::pair<int,int> MovingObject::getDestination() const {
     return destination_;
 }
 
-std::list<Place> MovingObject::getPath() const {
-    return path_;
-}
-
 void MovingObject::setSpeed( int speed ) {
     speed_ = speed;
 }
@@ -43,10 +39,6 @@ void MovingObject::setDestination( int x , int y ) {
 
 void MovingObject::setDestination( std::pair<int,int> destination ) {
     destination_ = destination;
-}
-
-void MovingObject::setPath( std::list<Place> path ) {
-    path_ = path;
 }
 
 void MovingObject::addSpeed( int add ) {
@@ -62,6 +54,22 @@ bool MovingObject::isMove() {
 }
 
 void MovingObject::calculatePath() {
+    // temporary
+    auto destination = destination_;
+    while ( destination != place_[0][0]->getCoors() ) {
+        if (destination.first > place_[0][0]->getCoors().first) {
+            --destination.first;
+        }
+        else if (destination.first < place_[0][0]->getCoors().first) {
+            ++destination.first;
+        }
+        else if (destination.second > place_[0][0]->getCoors().second) {
+            --destination.second;
 
-
+        }
+        else if (destination.second < place_[0][0]->getCoors().second) {
+            ++destination.second;
+        }
+        path_.push_back(destination);
+    }
 }

@@ -4,8 +4,6 @@
 SimpleObject::SimpleObject() {
     id_         = std::make_pair(-1,-1);
     place_      = nullptr;
-    placeWidth_ = 0;
-    placeHight_ = 0;
     name_       = "No name";
 }
 
@@ -25,7 +23,7 @@ SimpleObject::SimpleObject(Place*** place, int placeWidth, int placeHight) {
 }
 
 SimpleObject::SimpleObject(const SimpleObject& simpleObject) {
-    this->id_         = simpleObject.getId();
+    this->id_         = simpleObject.id_;
     this->placeHight_ = simpleObject.placeHight_;
     this->placeWidth_ = simpleObject.placeWidth_;
     this->place_      = new Place**[placeHight_];
@@ -35,11 +33,11 @@ SimpleObject::SimpleObject(const SimpleObject& simpleObject) {
             this->place_[i][j]   = simpleObject.place_[i][j];
         }
     }
-    this->name_  = simpleObject.getName();
+    this->name_  = simpleObject.name_;
 }
 
 SimpleObject& SimpleObject::operator= ( const SimpleObject& simpleObject) {
-    this->id_    = simpleObject.getId();
+    this->id_    = simpleObject.id_;
     this->placeHight_ = simpleObject.placeHight_;
     this->placeWidth_ = simpleObject.placeWidth_;
     this->place_      = new Place**[placeHight_];
@@ -49,15 +47,22 @@ SimpleObject& SimpleObject::operator= ( const SimpleObject& simpleObject) {
             this->place_[i][j]   = simpleObject.place_[i][j];
         }
     }
-    this->name_  = simpleObject.getName();
+    this->name_  = simpleObject.name_;
     return *this;
 }
 
 bool SimpleObject::operator== ( const SimpleObject& simpleObject) const {
-    return (this->id_      == simpleObject.getId());
+    return (this->id_      == simpleObject.id_);
 }
 
-Place*** const SimpleObject::getPlaces() const {
+void setSize(int x, int y) {
+    place_.resize(y);
+    for ( int i = 0; i < y; ++i ) {
+        place_.resize(x);
+    }
+}
+
+std::vector<std::vector<Place*>> getPlaces() const {
     return place_;
 }
 
@@ -69,13 +74,24 @@ std::pair<int,int> SimpleObject::getId() const {
     return id_;
 }
 
-void SimpleObject::setPlaces( Place*** place) {
-    for ( int i = 0; i < placeHight_; ++i ) {
-        for ( int j = 0; j < placeWidth_; ++j ) {
+void SimpleObject::setPlaces( std::vector<std::vector<Place*>> place) {
+    place_ = place;
+    for ( int i = 0; i < place_.size(); ++i ) {
+        for ( int j = 0; j < place[i]_.size(); ++j ) {
             place_[i][j]->setObject(this);
         }
     }
-    place_ = place;
+}
+
+void SimpleObject::setPlace( Place* place, Map& map) {
+    int k1 = place.getCoors().first;
+    int k2 = place.getCoors().second;
+    for ( int i = 0; i < place_.size(); ++i ) {
+        for ( int j = 0; j < place[i]_.size(); ++j ) {
+            map[k1+i][k2+j]->setObject(this);
+            place_[i][j] = map[k1+i][k2+j];
+        }
+    }
 }
 
 void SimpleObject::setName( std::string name) {
@@ -91,7 +107,5 @@ SimpleObject::~SimpleObject() {
         for ( int j = 0; j < placeWidth_; ++j ) {
             place_[i][j]->setObject(nullptr);
         }
-        delete place_[i];
     }
-    delete place_;
 }

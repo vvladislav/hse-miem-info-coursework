@@ -9,6 +9,19 @@ Unit::Unit(const Unit& unit):MovingObject(unit), AttackingObject(unit), Destroya
     this->requirements_ = unit.getRequirements();
 }
 
+Unit::Unit(std::string name, int adress ,placeWidth, int placeHight, QPixmap* image
+    , int damage, int range, int health, int speed, std::list<Building*>& requirements) {
+    id_           = std::make_pair(-1,adress);
+    placeWidth_   = placeWidth;
+    placeHight_   = placeHight;
+    image_        = image;
+    damage_       = damage;
+    range_        = range;
+    health_       = health;
+    speed_        = speed;
+    requirements_ = requirements;
+}
+
 Unit& Unit::operator= ( const Unit& unit) {
     MovingObject::operator= (unit);
     DestroyableObject::operator= (unit);

@@ -10,16 +10,21 @@ MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
+    game_->readObjects();
     escButton_ = new QShortcut(QKeySequence(Qt::Key_Escape), this, SLOT(showMenu()));
     ui->setupUi(this);
-    QPixmap pix(":/common/images/forMainWindow.jpg");
+    QPixmap pix(":/images/forMainWindow.jpg");
     int width = ui->label->width();
     int height = ui->label->height();
     ui->label->setPixmap(pix.scaled(width,height,Qt::KeepAspectRatio));
     ui->stackedWidget->setCurrentIndex(mainMenu);
+
+    // from Mike's branch
     QObject::connect(ui->horizontalSlider, SIGNAL(valueChanged(int)), ui->lcdNumber, SLOT(display(int)));
     ui->radioButton1024->setChecked(true);
     ui->radioButton_2->setChecked(false);
+
+    // for game menu
     for ( int i = 0; i < gameMatrixY_; ++i ) {
         std::vector<QLabel*> vec;
             for ( int j = 0; j < gameMatrixX_; ++j ) {
@@ -52,14 +57,42 @@ MainWindow::MainWindow(QWidget *parent) :
     }
     // button up and down
     // late
-    QPixmap pixColumn(":/common/images/column.jpg");
+    QPixmap pixColumn(":/images/column.jpg");
     ui->border->setPixmap(pixColumn.scaledToWidth(ui->border->width()));
     ui->border_2->setPixmap(pixColumn.scaledToWidth(ui->border_2->width()));
+
+    // timer for real-time game
+    timer_ = new QTimer(this);
+    timer_->setInterval(1000);
+    connect(timer_, SIGNAL(timeout()), this, SLOT(updateTime()));
+    timer_->start();
+
 }
 
 MainWindow::~MainWindow()
 {
+    delete timer_;
     delete ui;
+}
+
+void MainWindow::updateTime() {
+    game_->makeTurn();
+    // refresh gameGui
+    for ( int i = 0; i < gameMatrixY_; ++i ) {
+        for ( int j = 0; j < gameMatrixX_; ++j ) {
+            if ( game_->map_[i][j].getObject().second != -1 ) {
+                gameMatrix_[i][j]
+                    ->setPixmap(game_->players_[game_->map_[i][j].getObject().first.first]
+                    .get// MARK
+                    .image_->scaledToWidth(ui->border_2->width()));
+            }
+            else {
+                gameMatrix_[i][j]
+                    ->setPixmap(game_->map_[i][j].getTerrain()
+                    .image_->scaledToWidth(ui->border_2->width()));
+            }
+        }
+    }
 }
 
 void MainWindow::showMenu()

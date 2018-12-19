@@ -27,8 +27,8 @@ class Player {
         int const getId() const;
         std::string const getName() const;
         int const getColor() const;
-        std::list<Unit> getUnits() const;
-        std::list<Building> getBuildings() const;
+        std::list<Unit>& getUnits();
+        std::list<Building>& getBuildings();
         std::list<Place*> getVisiblePlaces() const; 
         const std::list<Unit*> getChoosedUnits() const;
         const std::list<Building*> getChoosedBuildings() const;
@@ -46,10 +46,10 @@ class Player {
         void setResources(std::vector<std::pair<int,std::string> > resources);
         void setStatus( bool inGame );
 
-        void addUnit( Unit newUnit);
-        void removeUnit( Unit oldUnit);
-        void addBuilding( Building newBuilding);
-        void removeBuilding( Building& oldBuilding);
+        void add( Unit newUnit);
+        void remove( Unit oldUnit);
+        void add( Building newBuilding);
+        void remove( Building& oldBuilding);
         void addChoosedUnit( Unit* chooseUnit );
         void addChoosedBuilding( Building* chooseBuilding );
         void changePlaces( Unit travelUnit);

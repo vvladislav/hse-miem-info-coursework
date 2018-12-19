@@ -9,6 +9,8 @@ class AttackingObject : virtual public SimpleObject
     protected:
         int damage_;
         int range_;
+        Place* target_ = nullptr;
+        int typeTarget_ = 0;
     public:
         AttackingObject();
         AttackingObject(const AttackingObject& attackingObject);
@@ -17,9 +19,11 @@ class AttackingObject : virtual public SimpleObject
 
         int getDamage() const;
         int getRange() const;
+        Place* getTarget() const;
 
-        void setDamage( int const power );
-        void setRange( int const range );
+        void setDamage( int power );
+        void setRange( int range );
+        void setTarget( Place* target );
 
 };
 

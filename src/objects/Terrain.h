@@ -9,6 +9,9 @@ class Terrain {
         int permeability_ = 1;
         // image
     public:
+        // methods
+        QPixmap* image_;
+        // functions
         Terrain();
         Terrain& operator= (const Terrain& ter);
         Terrain( Terrain& ter );

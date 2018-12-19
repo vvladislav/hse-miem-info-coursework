@@ -60,4 +60,4 @@ SOURCES += src/main.cpp \
            src/objects/SimpleObject.cpp \
            src/objects/Terrain.cpp \
            src/objects/Unit.cpp
-RESOURCES += resources.qrc
+RESOURCES += common/resources.qrc

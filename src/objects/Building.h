@@ -6,7 +6,8 @@
 #include "DestroyableObject.h"
 #include "Unit.h"
 
-class Building : public DestroyableObject, public AttackingObject
+class Building : virtual public DestroyableObject,
+                 virtual public AttackingObject
 {
     private:
         std::list< Unit* > trainables_;
@@ -34,5 +35,8 @@ class Building : public DestroyableObject, public AttackingObject
         void rmRequirements( int idRm);
         bool hasRequirements();
 };
+
+// std::ostream& operator << (std::ostream &s, Building& building);
+// std::istream& operator >> (std::istream &s, Building& building); 
 
 #endif // BUILDING_H

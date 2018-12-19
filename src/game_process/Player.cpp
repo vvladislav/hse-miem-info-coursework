@@ -14,15 +14,15 @@ Player::Player() {
 }
 
 Player::Player(const Player& player) {
-    this->id_ = player.getId();
-    this->name_ = player.getName();
-    this->color_ = player.getColor();
-    this->resources_ = player.getResources();
-    this->choosedUnits_ = player.getChoosedUnits();
-    this->playersUnits_ = player.getUnits();
-    this->choosedBuildings_ = player.getChoosedBuildings();
-    this->playersBuildings_ = player.getBuildings();
-    this->visiblePlaces_ = player.getVisiblePlaces();
+    this->id_ = player.id_;
+    this->name_ = player.name_;
+    this->color_ = player.color_;
+    this->resources_ = player.resources_;
+    this->choosedUnits_ = player.choosedUnits_;
+    this->playersUnits_ = player.playersUnits_;
+    this->choosedBuildings_ = player.choosedBuildings_;
+    this->playersBuildings_ = player.playersBuildings_;
+    this->visiblePlaces_ = player.visiblePlaces_;
 }
 
 Player::Player( int id ) {
@@ -37,15 +37,15 @@ Player::Player( int id ) {
 }
 
 bool Player::operator== (const Player& player) const {
-    if ((this->id_         == player.getId()) &&
-        (this->name_             == player.getName()) &&
-        (this->color_      == player.getColor()) &&
-        (this->resources_         == player.getResources()) &&
-        (this->playersUnits_     == player.getUnits()) &&
-        (this->choosedUnits_     == player.getChoosedUnits()) &&
-        (this->choosedBuildings_ == player.getChoosedBuildings()) &&
-        (this->visiblePlaces_    == player.getVisiblePlaces()) &&
-        (this->inGame_           == player.getStatus()) )
+    if ((this->id_               == player.id_) &&
+        (this->name_             == player.name_) &&
+        (this->color_            == player.color_) &&
+        (this->resources_        == player.resources_) &&
+        (this->playersUnits_     == player.playersUnits_) &&
+        (this->choosedUnits_     == player.choosedUnits_) &&
+        (this->choosedBuildings_ == player.choosedBuildings_) &&
+        (this->visiblePlaces_    == player.visiblePlaces_) &&
+        (this->inGame_           == player.inGame_) )
         return true;
     return false;
 }
@@ -62,11 +62,11 @@ int const Player::getColor() const {
     return color_;
 }
 
-std::list<Unit> Player::getUnits() const {
+std::list<Unit>& Player::getUnits() {
     return playersUnits_;
 }
 
-std::list<Building> Player::getBuildings() const {
+std::list<Building>& Player::getBuildings() {
     return playersBuildings_;
 }
 
@@ -126,22 +126,22 @@ void Player::setStatus( bool inGame ) {
     inGame_ = inGame;
 }
 
-void Player::addUnit(Unit newUnit) {
+void Player::add(Unit newUnit) {
     playersUnits_.push_back(newUnit);
 }
 
-void Player::removeUnit(Unit oldUnit) {
+void Player::remove(Unit oldUnit) {
     auto it = playersUnits_.begin();
     std::advance( it, oldUnit.getId().second );
     playersUnits_.erase(it);
 }
 
-void Player::addBuilding( Building newBuilding) {
+void Player::add( Building newBuilding) {
     newBuilding.setId( std::make_pair(id_ , playersUnits_.size()) );
     playersBuildings_.push_back(newBuilding);
 }
 
-void Player::removeBuilding(Building& oldBuilding) {
+void Player::remove(Building& oldBuilding) {
     auto it = playersBuildings_.begin();
     std::advance( it , oldBuilding.getId().second );
     playersBuildings_.erase(it);

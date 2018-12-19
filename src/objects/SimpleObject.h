@@ -8,28 +8,30 @@
 class SimpleObject
 {
     protected:
+        std::vector<std::vector<Place*>> place_; // for matrix of Place* for big objects
         std::pair< int , int > id_; // player's id, id in list
-        Place*** place_; // for matrix of Place* for big objects
-        int placeWidth_;
-        int placeHight_;
         std::string name_;
-        // there are must be image
+
     public:
+        // wide uses in many variants in class Game
+        QPixmap* image_;
+
+        // methods
         SimpleObject();
         SimpleObject(Place*** place, int placeWidth, int placeHight);
         SimpleObject(const SimpleObject& simpleObject);
         SimpleObject& operator= ( const SimpleObject& simpleObject);
         bool operator== ( const SimpleObject& simpleObject) const;
 
-        // there are must be function with image
-
-        Place*** const getPlaces() const;
         std::string const getName() const;
         std::pair<int,int> getId() const;
+        std::vector<std::vector<Place*>> getPlaces() const;
 
-        void setPlaces( Place*** place);
         void setName( std::string name);
         void setId( std::pair<int,int> id );
+        void setSize(int x, int y);
+        void setPlaces( std::vector<std::vector<Place*>> place);
+        void setPlace( Place* place, Map& map);
 
         ~SimpleObject();
 

@@ -8,6 +8,7 @@
 #include <QLabel>
 #include "All-include.h"
 #include "QPushButton"
+#include "QTimer"
 
 namespace Ui {
 class MainWindow;
@@ -23,6 +24,8 @@ public:
     ~MainWindow();
 
 private slots:
+    void updateTime();
+
     void showMenu();
 
     void on_startGameButton_clicked();
@@ -66,6 +69,7 @@ private:
     std::vector<std::vector<QLabel*>> gameMatrix_;
     std::vector<std::vector<QLabel*>> choosedMatrix_;
     std::vector<std::vector<QLabel*>> trainMatrix_;
+    QTimer* timer_;
     Ui::MainWindow *ui;
 };
 
