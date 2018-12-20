@@ -26,6 +26,8 @@ class Building : virtual public DestroyableObject,
         void setTrainables(std::list< Unit* > trainables);
         void setTraining(std::list< Unit* > training);
         void setRequirements(std::list< Building* > requirements);
+        void setPlaces( std::vector<std::vector<Place*>> place);
+        void setPlace( Place* place, Map& map);
 
         void addTrainables(Unit* trainables);
         void rmTrainables(int idRm);

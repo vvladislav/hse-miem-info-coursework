@@ -26,7 +26,7 @@ Map& Map::operator = (const Map& map) {
     return *this;
 }
 
-const std::vector<Place> Map::operator[] (const int x ) const {
+std::vector<Place> Map::operator[] (const int x ) {
     if ( x < places_.size() )
         return places_[x];
     return places_[0];
@@ -56,8 +56,12 @@ void Map::setPlaces( std::vector<std::vector<Place>> places ) {
     places_ =  places;
 }
 
-Place Map::getPlace(int x, int y) const {
+Place& Map::getPlace(int x, int y) {
     return places_[x][y];
+}
+
+Place& Map::getPlace( std::pair<int,int> coors ) {
+    return places_[coors.first][coors.second];
 }
 
 std::vector<std::vector<Place>> const Map::getPlaces() const {

@@ -95,7 +95,7 @@ void Game::rmUnitPrototype( Unit rm ) {
     int i = 0;
     for ( ; (i < unitPrototype_.size()) && (unitPrototype_[i] == rm); ++i );
     if ( i != unitPrototype_.size() )
-        unitPrototype_.erase(unitPrototype_.begin() + i);
+        unitPrototype_.erase(unitPrototype_.cbegin() + i);
 }
 
 void Game::rmBuildingPrototype( Building rm ) {
@@ -118,7 +118,7 @@ void Game::makeTurn() {
             std::list<Unit> & units = i.getUnits();
             for ( auto i : units ) {
                 if ( i.isMove() ) {
-                    i.setPlace(i.path_.front(),map_);
+                    i.setPlace( &(map_.getPlace(i.path_.front())) , map_);
                     i.path_.pop_front();
                 }
                 if ( i.getTarget() != nullptr ) {

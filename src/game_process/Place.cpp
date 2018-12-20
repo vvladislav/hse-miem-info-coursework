@@ -71,10 +71,18 @@ void Place::setObject(std::pair< std::pair <int,int> , int > newObject) {
     object_ =  newObject;
 }
 
-void Place::setObject( Unit newObject) {
-    object_ =  std::make_pair(newObject.getId(),1);
+void Place::setObject( const Unit* newObject) {
+    object_ =  std::make_pair(newObject->getId(),1);
 }
 
-void Place::setObject( Building newObject) {
-    object_ =  std::make_pair(newObject.getId(),0);
+void Place::setObject( const Building* newObject) {
+    object_ =  std::make_pair(newObject->getId(),0);
+}
+
+void Place::setObject( Unit* newObject) {
+    object_ =  std::make_pair(newObject->getId(),1);
+}
+
+void Place::setObject( Building* newObject) {
+    object_ =  std::make_pair(newObject->getId(),0);
 }

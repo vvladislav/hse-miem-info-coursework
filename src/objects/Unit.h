@@ -14,8 +14,8 @@ class Unit : virtual public MovingObject,
         std::list < Building* > requirements_;
     public:
         Unit();
-        Unit(const Unit& unit);
-        Unit(std::string name, int placeWidth, int placeHight, QPixmap* image
+        Unit( const Unit& unit);
+        Unit(std::string name, int adress, int placeWidth, int placeHight, QPixmap* image
             , int damage, int range, int health, int speed, std::list<Building*>& requirements);
         Unit& operator= ( const Unit& unit);
         bool operator== (const Unit& unit) const;
@@ -23,6 +23,8 @@ class Unit : virtual public MovingObject,
         std::list < Building* > const getRequirements() const;
 
         void setRequirements(std::list< Building* > requirements);
+        void setPlaces( std::vector<std::vector<Place*>> place);
+        void setPlace( Place* place, Map& map);
 
         void addRequirements( Building* add);
         void rmRequirements( int idRm );

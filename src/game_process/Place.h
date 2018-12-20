@@ -31,8 +31,10 @@ class Place
         void addAttackedBy(Building &object);
         void setTerrain( Terrain& ter);
         void setObject(std::pair< std::pair<int,int> , int > newObject);
-        void setObject( Unit newObject);
-        void setObject( Building newObject);
+        void setObject( const Unit* newObject);
+        void setObject( const Building* newObject);
+        void setObject( Unit* newObject);
+        void setObject( Building* newObject);
 
 };
 

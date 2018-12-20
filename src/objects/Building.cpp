@@ -15,11 +15,19 @@ Building::Building( const Building& building ): AttackingObject(building), Destr
 }
 
 Building& Building::operator= ( const Building& building) {
-    DestroyableObject::operator= (building);
-    SimpleObject::operator= (building);
-    this->requirements_ = building.getRequirements();
-    this->trainables_ = building.getTrainables();
-    this->training_ = building.getTraining();
+    damage_         = building.damage_;
+    range_          = building.range_;
+    target_         = building.target_;
+    typeTarget_     = building.typeTarget_;
+    health_         = building.health_;
+    place_          = building.place_;
+    id_             = building.id_;
+    name_           = building.name_;
+    image_          = building.image_;
+    requirements_   = building.getRequirements();
+    requirements_   = building.getRequirements();
+    trainables_     = building.getTrainables();
+    training_       = building.getTraining();
     return *this;
 }
 
@@ -49,6 +57,26 @@ void Building::setTraining(std::list< Unit* > training) {
 
 void Building::setRequirements(std::list< Building* > requirements) {
     requirements_ = requirements;
+}
+
+void Building::setPlaces( std::vector<std::vector<Place*>> place) {
+    place_ = place;
+    for ( int i = 0; i < place_.size(); ++i ) {
+        for ( int j = 0; j < place_[i].size(); ++j ) {
+            place_[i][j]->setObject(this);
+        }
+    }
+}
+
+void Building::setPlace( Place* place, Map& map) {
+    int k1 = place->getCoors().first;
+    int k2 = place->getCoors().second;
+    for ( int i = 0; i < place_.size(); ++i ) {
+        for ( int j = 0; j < place_[i].size(); ++j ) {
+            map[k1+i][k2+j].setObject(this);
+            *(place_[i][j]) = map[k1+i][k2+j];
+        }
+    }
 }
 
 void Building::addTrainables(Unit* add) {
@@ -85,8 +113,9 @@ bool Building::hasRequirements() {
     return requirements_.size();
 }
 
+/*
 std::ostream& operator << (std::ostream &s, Building& building) {
-        if ( building.getPlaces() ) {
+        if ( building.getPlaces() != nullptr) {
             fout << building.getPlaces()->getCoors()[0].first << ' '
                  << building.getPlaces()->getCoors()[0].second
                  << std::endl;
@@ -125,8 +154,10 @@ std::ostream& operator << (std::ostream &s, Building& building) {
     }
     return s;
 }
+*/
 
+/*
 std::istream& operator >> (std::istream &s, Building& building) {
-
     return s;
 }
+*/

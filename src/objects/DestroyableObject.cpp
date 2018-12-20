@@ -5,7 +5,7 @@ DestroyableObject::DestroyableObject():SimpleObject() {
     health_ = 1;
 }
 
-DestroyableObject::DestroyableObject(const DestroyableObject& destroyableObject): SimpleObject(destroyableObject) {
+DestroyableObject::DestroyableObject( const DestroyableObject& destroyableObject): SimpleObject(destroyableObject) {
     this->health_ = destroyableObject.getHealth(); 
 }
 

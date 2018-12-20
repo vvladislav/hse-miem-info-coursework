@@ -10,7 +10,7 @@ class DestroyableObject : virtual public SimpleObject
         int health_;
     public:
         DestroyableObject();
-        DestroyableObject(const DestroyableObject& destroyableObject);
+        DestroyableObject( const DestroyableObject& destroyableObject);
         DestroyableObject& operator= ( const DestroyableObject& destroyableObject );
         bool operator== ( const DestroyableObject& destroyableObject) const;
         DestroyableObject& operator- ( int rm );

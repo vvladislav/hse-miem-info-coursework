@@ -28,6 +28,7 @@ class Player {
         std::string const getName() const;
         int const getColor() const;
         std::list<Unit>& getUnits();
+        Unit* getUnit( int id );
         std::list<Building>& getBuildings();
         std::list<Place*> getVisiblePlaces() const; 
         const std::list<Unit*> getChoosedUnits() const;

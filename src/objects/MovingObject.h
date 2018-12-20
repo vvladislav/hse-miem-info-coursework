@@ -11,11 +11,11 @@ class MovingObject : virtual public SimpleObject
         std::pair<int,int> destination_;
     public:
         // methods
-        std::list<Place*> path_;
+        std::list<std::pair<int,int>> path_;
         // functions
         MovingObject();
-        MovingObject(const MovingObject& movingObject);
-        MovingObject& operator= ( const MovingObject& movingObject);
+        MovingObject( const MovingObject& movingObject);
+        MovingObject& operator= ( MovingObject& movingObject);
         bool operator== ( const MovingObject& movingObject) const; 
 
         int const getSpeed() const ;

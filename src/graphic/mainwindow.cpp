@@ -63,7 +63,7 @@ MainWindow::MainWindow(QWidget *parent) :
 
     // timer for real-time game
     timer_ = new QTimer(this);
-    timer_->setInterval(1000);
+    timer_->setInterval(2000);
     connect(timer_, SIGNAL(timeout()), this, SLOT(updateTime()));
     timer_->start();
 
@@ -82,9 +82,9 @@ void MainWindow::updateTime() {
         for ( int j = 0; j < gameMatrixX_; ++j ) {
             if ( game_->map_[i][j].getObject().second != -1 ) {
                 gameMatrix_[i][j]
-                    ->setPixmap(game_->players_[game_->map_[i][j].getObject().first.first]
-                    .get// MARK
-                    .image_->scaledToWidth(ui->border_2->width()));
+                    ->setPixmap(game_->getPlayers()[game_->map_[i][j].getObject().first.first]
+                    .getUnit(game_->map_[i][j].getObject().first.second)
+                    ->image_->scaledToWidth(ui->border_2->width()));
             }
             else {
                 gameMatrix_[i][j]

@@ -18,7 +18,7 @@ class SimpleObject
 
         // methods
         SimpleObject();
-        SimpleObject(Place*** place, int placeWidth, int placeHight);
+        SimpleObject( std::vector< std::vector< Place* > > place);
         SimpleObject(const SimpleObject& simpleObject);
         SimpleObject& operator= ( const SimpleObject& simpleObject);
         bool operator== ( const SimpleObject& simpleObject) const;
@@ -30,8 +30,8 @@ class SimpleObject
         void setName( std::string name);
         void setId( std::pair<int,int> id );
         void setSize(int x, int y);
-        void setPlaces( std::vector<std::vector<Place*>> place);
-        void setPlace( Place* place, Map& map);
+        virtual void setPlaces( std::vector<std::vector<Place*>> place);
+        virtual void setPlace( Place* place, Map& map);
 
         ~SimpleObject();
 

@@ -66,6 +66,14 @@ std::list<Unit>& Player::getUnits() {
     return playersUnits_;
 }
 
+Unit* Player::getUnit( int id ) {
+    auto it = playersUnits_.begin();
+    for ( ; id > 0; --id) {
+        ++it;
+    }
+    return &(*it);
+}
+
 std::list<Building>& Player::getBuildings() {
     return playersBuildings_;
 }
